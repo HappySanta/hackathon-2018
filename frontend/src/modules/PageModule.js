@@ -1,5 +1,5 @@
 import {goBack, push, replace} from "react-router-redux"
-import {bootstrap} from "./Bootstrap"
+import {bootstrap} from "./BootstrapModule"
 const SET_PAGE = "Page.SET_PAGE"
 const SET_PARAMS = 'Page.SET_PARAMS'
 
@@ -31,7 +31,7 @@ function getPanelViewMap() {
 	return {}
 }
 
-const Page = (state = initState, action) => {
+const PageModule = (state = initState, action) => {
 	switch (action.type) {
 		case SET_PAGE:
 			state.path.push({name: state.name, params: state.params})
@@ -74,7 +74,6 @@ export function subscribeToHistory(history) {
 export function handleLocation(pathname) {
 	return dispatch => {
 		let route = getRouteByPath(pathname)
-		console.log(route.panelName)
 		switch (route.panelName) {
 			case PANEL_MAIN:
 				dispatch(bootstrap())
@@ -96,4 +95,4 @@ export function setPageParams(params) {
 	return {type:SET_PARAMS, params}
 }
 
-export default Page
+export default PageModule

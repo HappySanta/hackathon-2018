@@ -1,7 +1,7 @@
 const SET_ERROR = "FatalError.SET_ERROR"
 const REMOVE_ERROR = "FatalError.REMOVE_ERROR"
 
-const FatalError = (state = false, action) => {
+const FatalErrorModule = (state = false, action) => {
 	switch (action.type) {
 		case SET_ERROR:
 			return action.error
@@ -27,4 +27,4 @@ export function removeFatalError() {
     }
 }
 
-export default FatalError
+export default FatalErrorModule

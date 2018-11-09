@@ -1,10 +1,10 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import {removeFatalError} from "../../modules/FatalError"
+import {removeFatalError} from "../../modules/FatalErrorModule"
 import L from "../../lang/L"
 import {
 	getRouteByPath, PANEL_MAIN, popPage, VIEW_MAIN,
-} from "../../modules/Page"
+} from "../../modules/PageModule"
 import {withRouter} from "react-router"
 import Error from "../../components/Error/Error"
 import Icon24Back from '@vkontakte/icons/dist/24/back'
@@ -114,7 +114,6 @@ class MobileContainer extends Component {
 			<View id={VIEW_MAIN} activePanel={route.panelName}>
 				<Panel id={PANEL_MAIN}>
 					<PanelHeader>My App</PanelHeader>
-					Hello world
 				</Panel>
 			</View>
 		</Root>
@@ -123,7 +122,7 @@ class MobileContainer extends Component {
 
 function mapStateToProps(state) {
 	return {
-		fatal: state.FatalError,
+		fatal: state.FatalErrorModule,
 	}
 }
 

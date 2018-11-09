@@ -1,7 +1,7 @@
 import Backend from "../tools/Backend"
-import {setFatalError} from "./FatalError"
+import {setFatalError} from "./FatalErrorModule"
 
-const Bootstrap = (state = false, action) => {
+const BootstrapModule = (state = false, action) => {
 	switch (action.type) {
 		default:
 			return state
@@ -18,4 +18,4 @@ export function bootstrap() {
 	}
 }
 
-export default Bootstrap
+export default BootstrapModule

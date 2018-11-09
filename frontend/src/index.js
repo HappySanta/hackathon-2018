@@ -8,7 +8,7 @@ import L from "./lang/L"
 import './style/index.css'
 import VkConnect from '@vkontakte/vkui-connect'
 import {ConnectedRouter} from "react-router-redux"
-import {handleLocation, subscribeToHistory} from "./modules/Page"
+import {handleLocation, subscribeToHistory} from "./modules/PageModule"
 import Error from "./components/Error/Error"
 import registerServiceWorker from "./registerServiceWorker"
 
