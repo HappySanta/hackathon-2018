@@ -112,3 +112,70 @@ export function isDevEnv() {
 export function isIphoneX() {
 	return /iphone/i.test(window.navigator.userAgent) && window.screen.height === 812
 }
+
+export function classNames(object) {
+	let names = []
+	for(let key in object) {
+		if (object.hasOwnProperty(key) && object[key]) {
+			names.push(key)
+		}
+	}
+	return names.join(" ")
+}
+
+
+/**
+ * @param cycleLength
+ * @param lastStartDayTimestampMs
+ * @param now
+ * @return Number
+ */
+export function GetDayOfCycle(cycleLength, lastStartDayTimestampMs, now = null) {
+	const lastStartDay = moment(lastStartDayTimestampMs).startOf('day')
+	if (now === null) {
+		now = moment().startOf('day')
+	}
+	if (now.isBefore(lastStartDay)) {
+		const daysBeforeStartCycle = Math.abs(lastStartDay.diff(now, 'days'))
+		if (daysBeforeStartCycle < cycleLength) {
+			return cycleLength - daysBeforeStartCycle
+		} else {
+			return cycleLength - (daysBeforeStartCycle - (Math.floor(daysBeforeStartCycle/cycleLength)*cycleLength))
+		}
+	}
+	const daysPerLastCycle = Math.abs(lastStartDay.diff(now, 'days'))
+	if (daysPerLastCycle < cycleLength) {
+		return daysPerLastCycle
+	} else {
+		return daysPerLastCycle - (Math.floor(daysPerLastCycle/cycleLength)*cycleLength)
+	}
+}
+
+
+function test() {
+	const cycleLength = 28
+	const lastStartDayTimestampMs = moment('2018-11-01').valueOf()
+
+	let zero = GetDayOfCycle(cycleLength, lastStartDayTimestampMs, moment('2018-11-01'))
+	console.assert(zero === 0, "Ожидалось что это 0 день цикла, " + zero)
+
+	let ten = GetDayOfCycle(cycleLength, lastStartDayTimestampMs, moment('2018-11-10'))
+	console.assert(ten === 9, "Ожидалось что это 9 день цикла, " + ten)
+
+	let zero2 = GetDayOfCycle(cycleLength, lastStartDayTimestampMs, moment('2018-11-29'))
+	console.assert(zero2 === 0, "Ожидалось что это 0 день цикла, " + zero2)
+
+	let lastDayOfCycle = GetDayOfCycle(cycleLength, lastStartDayTimestampMs, moment('2018-11-28'))
+	console.assert(lastDayOfCycle === cycleLength-1, "Ожидалось что это последний день цикла, " + lastDayOfCycle)
+
+	let lastDayOfCycleBefore = GetDayOfCycle(cycleLength, lastStartDayTimestampMs, moment('2018-10-31'))
+	console.assert(lastDayOfCycleBefore === cycleLength-1, "Ожидалось что это последний день цикла, " + lastDayOfCycleBefore)
+
+	let tenBeforeStart = GetDayOfCycle(cycleLength, lastStartDayTimestampMs, moment('2018-10-13'))
+	console.assert(tenBeforeStart === 9, "Ожидалось что это 9 день цикла, " + tenBeforeStart)
+
+	let tenBeforeStart2 = GetDayOfCycle(cycleLength, lastStartDayTimestampMs, moment('2018-09-15'))
+	console.assert(tenBeforeStart2 === 9, "Ожидалось что это 9 день цикла, " + tenBeforeStart2)
+}
+
+test()

@@ -11,6 +11,8 @@ import Icon24Back from '@vkontakte/icons/dist/24/back'
 import Icon28ChevronBack from '@vkontakte/icons/dist/28/chevron_back'
 import {Root, View, Panel, PanelHeader, HeaderButton, platform, IOS} from '@vkontakte/vkui'
 import '@vkontakte/vkui/dist/vkui.css'
+import Calendar from "../../components/Calendar/Calendar"
+import moment from "moment"
 
 const osName = platform()
 
@@ -114,6 +116,8 @@ class MobileContainer extends Component {
 			<View id={VIEW_MAIN} activePanel={route.panelName}>
 				<Panel id={PANEL_MAIN}>
 					<PanelHeader>My App</PanelHeader>
+					<Calendar month={moment()}/>
+					<Calendar month={moment().add(1, 'month')}/>
 				</Panel>
 			</View>
 		</Root>
