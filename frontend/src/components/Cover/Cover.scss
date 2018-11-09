@@ -1,0 +1,32 @@
+.Cover {
+	height: 100%;
+	color: #7B808C;
+	line-height: 22px;
+	text-align: center;
+	background: #FFFFFF;
+	position: relative;
+
+	&__content {
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+	}
+
+	&__icon {
+		background: url('img/plak-tablet.jpg') no-repeat center center;
+		width: 50px;
+		height: 34px;
+		background-size: contain;
+		margin: auto;
+		padding-bottom: 40px;
+	}
+
+	@media(-webkit-min-device-pixel-ratio: 2),
+	(min-resolution: 192dpi) {
+		&__icon {
+			background: url('img/plak-tablet-x2.jpg') no-repeat center center;
+			background-size: contain;
+		}
+	}
+}

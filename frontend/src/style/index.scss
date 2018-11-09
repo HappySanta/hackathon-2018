@@ -1,0 +1,43 @@
+@import "_vars.scss";
+
+body {
+	margin: 0;
+	padding: 0;
+	background: #FFF;
+	color: #000;
+	direction: ltr;
+	font-size: $primary-font-size;
+	font-family: -apple-system, BlinkMacSystemFont, Roboto, Open Sans, Helvetica Neue, sans-serif;
+	line-height: $primary-line-height;
+	font-weight: 400;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	-webkit-tap-highlight-color: transparent;
+}
+
+input {
+	margin: 0;
+}
+
+
+.plak-wrapper {
+	position: absolute;
+	top: 50%;
+	transform: translateY(-50%);
+	width: 100%;
+}
+.plak {
+	background: url("./img/plak.png") no-repeat center center/cover;
+	width: 72px;
+	height: 72px;
+	margin: auto;
+}
+
+.plak-text {
+	margin-top: 16px;
+	font-size: 16px;
+	color: #71757A;
+	text-align: center;
+	line-height: 20px;
+}
+

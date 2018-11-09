@@ -132,6 +132,10 @@ return [
     |
     */
 
+    'id' => env('APP_ID'),
+    'secret' => env('APP_SECRET'),
+    'service' => env('APP_SERVICE'),
+
     'providers' => [
 
         /*

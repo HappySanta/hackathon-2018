@@ -1,0 +1,10 @@
+.Error {
+  padding: 5px;
+  box-sizing: border-box;
+  overflow: auto;
+
+  div {
+    word-break: break-word;
+    font-size: 10px;
+  }
+}

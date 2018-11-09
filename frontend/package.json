@@ -1,0 +1,67 @@
+{
+	"name": "vk-app",
+	"version": "0.1.0",
+	"private": true,
+	"homepage": "./",
+	"dependencies": {
+		"@vkontakte/icons": "^1.2.1",
+		"@vkontakte/vkui": "^2.12.5",
+		"@vkontakte/vkui-connect": "^1.1.2",
+		"@vkontakte/vkui-connect-mock": "^1.0.5",
+		"history": "^4.7.2",
+		"i18next": "^10.0.7",
+		"moment": "^2.21.0",
+		"node-sass-chokidar": "0.0.3",
+		"npm-run-all": "^4.1.2",
+		"query-string": "^5.0.1",
+		"react": "^16.1.0",
+		"react-dom": "^16.1.0",
+		"react-redux": "^5.0.6",
+		"react-router": "^4.3.1",
+		"react-router-redux": "^5.0.0-alpha.9",
+		"react-scripts": "1.0.17",
+		"redux": "^3.7.2",
+		"redux-thunk": "^2.2.0"
+	},
+	"scripts": {
+		"make:component": "node src/tools/cli/make-component.js",
+		"build-css": "node-sass-chokidar src/ -o src/",
+		"watch-css": "npm run build-css && node-sass-chokidar src/ -o src/ --watch --recursive",
+		"start-js": "react-scripts start",
+		"start": "npm-run-all -p watch-css start-js",
+		"build-js": "react-scripts build",
+		"build": "npm-run-all build-css build-js",
+		"eject": "react-scripts eject",
+		"deploy": "npm run build"
+	},
+	"proxy": {
+		"/app": {
+			"target": "http://localhost:3000",
+			"secure": false,
+			"pathRewrite": {
+				"^/app": ""
+			}
+		},
+		"/mobile": {
+			"target": "http://localhost:3000",
+			"secure": false,
+			"pathRewrite": {
+				"^/mobile": ""
+			}
+		},
+		"/api": {
+			"target": "https://192.168.10.239",
+			"secure": false,
+			"headers": {
+				"HOST": "cycles.local"
+			}
+		},
+		"/uploads": {
+			"target": "https://192.168.10.239",
+			"secure": false,
+			"headers": {
+				"HOST": "cycles.local"
+			}
+		}
+	}
+}
