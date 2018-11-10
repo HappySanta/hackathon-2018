@@ -17,6 +17,14 @@ body {
 	background-size: cover;
 }
 
+.PanelHeader {
+	display: none !important;
+}
+
+.Panel__in {
+	padding-top: 0 !important;
+}
+
 input {
 	margin: 0;
 }

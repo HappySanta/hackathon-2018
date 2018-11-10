@@ -74,7 +74,7 @@ export function createUser(onSuccess) {
 			}
 		}).catch(e => {
 			dispatch(setUserLoading(false))
-			setFatalError(e)
+			dispatch(setFatalError(e))
 		})
 	}
 }

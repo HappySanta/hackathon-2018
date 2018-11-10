@@ -33,7 +33,7 @@ class MenstruatedAt extends Component {
 				<div className="Timing__bottom-double">
 					<div className="Timing__first-button">
 						<button className="Btn Timing__button-next" onClick={() => this.toMain()}>
-							{!loading ? L.t('next') : <WaitDots/>}
+							{!loading ? L.t('next') : <WaitDots blue={true}/>}
 						</button>
 					</div>
 					<div>
