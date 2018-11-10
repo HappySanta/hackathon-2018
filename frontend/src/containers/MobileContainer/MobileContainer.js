@@ -4,7 +4,7 @@ import {removeFatalError} from "../../modules/FatalErrorModule"
 import L from "../../lang/L"
 import {
 	getRouteByPath,
-	PANEL_BDATE,
+	PANEL_BDATE, PANEL_CALENDAR,
 	PANEL_CYCLE_LENGTH, PANEL_FRIEND_LIST,
 	PANEL_MAIN,
 	PANEL_MENSTRUATED_AT,
@@ -26,6 +26,9 @@ import Bdate from "../../components/Timing/Bdate"
 import FriendList from "../../components/FriendList/FriendList"
 import MainScreen from "../../components/MainScreen/MainScreen"
 import WaitScreenMobile from "../../components/WaitScreenMobile/WaitScreenMobile"
+import Calendar from "../../components/Calendar/Calendar"
+import CalendarScreen from "../../components/CalendarScreen/CalendarScreen"
+import Footer from "../../components/Footer/Footer"
 
 const osName = platform()
 
@@ -135,6 +138,9 @@ class MobileContainer extends Component {
 					<Panel id={PANEL_MAIN}>
 						<MainScreen/>
 					</Panel>
+					<Panel id={PANEL_CALENDAR}>
+						<CalendarScreen/>
+					</Panel>
 					<Panel id={PANEL_CYCLE_LENGTH} className="MobileContainer__panel">
 						<CycleLength/>
 					</Panel>
@@ -152,6 +158,7 @@ class MobileContainer extends Component {
 					</Panel>
 				</View>
 			</Root>
+			{route.panelId === PANEL_MAIN || route.panelId === PANEL_CALENDAR ? <Footer main={route.panelId === PANEL_MAIN}/> : null}
 		</div>
 	}
 }

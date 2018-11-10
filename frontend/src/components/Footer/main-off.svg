@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="20px" height="21px" viewBox="0 0 20 21" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 52.2 (67145) - http://www.bohemiancoding.com/sketch -->
+    <title>round-donut_large-24px</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="iPhone-8-Copy-18" transform="translate(-52.000000, -632.000000)">
+            <g id="Tab-Bar" transform="translate(0.000000, 618.000000)">
+                <g id="round-donut_large-24px" transform="translate(62.000000, 24.100000) rotate(47.000000) translate(-62.000000, -24.100000) translate(50.000000, 12.100000)">
+                    <polygon id="Path" points="0 0 24 0 24 24 0 24"></polygon>
+                    <g id="Group-14" transform="translate(3.000000, 1.000000)" fill-rule="nonzero" stroke="#828A99" stroke-linecap="round" stroke-width="2">
+                        <path d="M10.948704,5.44926065 C10.948704,3.31373402 10.2049261,1.35192603 8.96228767,-0.191246059" id="Path" transform="translate(9.955496, 2.629007) rotate(-64.000000) translate(-9.955496, -2.629007) "></path>
+                        <path d="M3.23997882,4.08434983 C1.25999977,5.73526418 -5.1159077e-13,8.22048773 0,11 C0,15.9705627 4.02943725,20 9,20 C13.9705627,20 18,15.9705627 18,11 C18,8.86447337 17.2562221,6.90266537 16.0135836,5.35949329" id="Path"></path>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
