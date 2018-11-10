@@ -2,6 +2,7 @@ import User from "../entities/User"
 import SplitDate from "../entities/SplitDate"
 import Backend from "../tools/Backend"
 import {setFatalError} from "./FatalErrorModule"
+import * as connect from "@vkontakte/vkui-connect"
 
 const initState = User.fromRaw({})
 
@@ -65,6 +66,7 @@ export function createUser(onSuccess) {
 		let user = getState().UserModule
 		dispatch(setUserLoading(true))
 		Backend.request('v1/user', user.toRaw(), "POST").then(response => {
+			connect.send("VKWebAppAllowNotifications", {})
 			dispatch(setUserLoading(false))
 			dispatch(initUser(User.fromRaw(response)))
 			if (onSuccess) {
