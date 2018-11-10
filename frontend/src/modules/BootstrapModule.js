@@ -2,11 +2,14 @@ import Backend from "../tools/Backend"
 import {setFatalError} from "./FatalErrorModule"
 import {initUser} from "./UserModule"
 import User from "../entities/User"
+import {initDailyState} from "./DailyStateModule"
+import DailyState from "../entities/DailyState"
 
 export const SET_BOOTSTRAP = 'BootstrapModule.SET_BOOTSTRAP'
 
 const initState = {
 	loaded: false,
+	stateSchema: null,
 }
 
 const BootstrapModule = (state = initState, action) => {
@@ -32,6 +35,12 @@ export function bootstrap(onSuccess) {
 		Backend.request('v1/bootstrap', {}).then(r => {
 			if (r.user) {
 				dispatch(initUser(User.fromRaw(r.user)))
+			}
+			if (r.schema) {
+				dispatch(setBootstrap({stateSchema: r.schema}))
+			}
+			if (r.state) {
+				dispatch(initDailyState(DailyState.fromRaw(r.state)))
 			}
 			onSuccess(r)
 		}).catch(e => {
