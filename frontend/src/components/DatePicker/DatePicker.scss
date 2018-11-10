@@ -1,0 +1,39 @@
+.DatePicker {
+	margin: 0 16px;
+
+	&__wrapper {
+		position: relative;
+	}
+
+	&__visible {
+
+		text-align: center;
+		background: rgba(194,140,148,0.04);
+		border: 1px solid rgba(194,140,148,0.70);
+		padding: 13px 16px 13px 16px;
+		border-radius: 10px;
+		line-height: 26px;
+
+		span {
+			font-size: 25px;
+			color: rgba(0,0,0,0.88);
+			font-weight: 600;
+			line-height: 26px;
+			vertical-align: sub;
+		}
+	}
+
+	&__invisible {
+		opacity: 0;
+		position: absolute;
+		width: 100%;
+		top: 0;
+		left: 0;
+		height: 56px;
+
+		input {
+			height: 56px;
+			width: 100%;
+		}
+	}
+}
