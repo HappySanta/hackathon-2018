@@ -134,6 +134,8 @@ export function GetDayOfCycle(cycleLength, lastStartDayTimestampMs, now = null) 
 	const lastStartDay = moment(lastStartDayTimestampMs).startOf('day')
 	if (now === null) {
 		now = moment().startOf('day')
+	} else {
+		now.startOf('day')
 	}
 	if (now.isBefore(lastStartDay)) {
 		const daysBeforeStartCycle = Math.abs(lastStartDay.diff(now, 'days'))

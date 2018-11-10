@@ -1,9 +1,8 @@
 import React, {Component} from "react"
 import {connect} from "react-redux"
-import PropTypes from "prop-types"
-import "./DayState.css"
 import L from "../../lang/L"
 import {classNames} from "../../tools/helpers"
+import "./DayState.css"
 
 class DayState extends Component {
 
@@ -56,11 +55,12 @@ class DayState extends Component {
 			"DayState__item--active" : this.isActiveItem(item, index, category),
 		})
 		return <div onClick={() => this.toggleItem(item, index, category)}
+					key={index}
 					className={className}>{item}</div>
 	}
 
-	renderCategory = (category) => {
-		return <div className="DayState__category">
+	renderCategory = (category, index) => {
+		return <div className="DayState__category" key={index}>
 			<div className="DayState__category-name">{L.t("category_"+category.name)}</div>
 			<div className="DayState__category-items">
 				{category.items.map( (item, index) => this.renderItem(item, index, category))}
