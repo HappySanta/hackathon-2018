@@ -27,6 +27,7 @@ import MenstruationLength from "../../components/Timing/MenstruationLength"
 import MenstruatedAt from "../../components/Timing/MenstruatedAt"
 import Bdate from "../../components/Timing/Bdate"
 import FriendList from "../../components/FriendList/FriendList"
+import MainScreen from "../../components/MainScreen/MainScreen"
 
 const osName = platform()
 
@@ -134,7 +135,7 @@ class MobileContainer extends Component {
 			<Root activeView={route.getView()}>
 				<View id={VIEW_MAIN} activePanel={route.panelId}>
 					<Panel id={PANEL_MAIN}>
-						Main
+						<MainScreen/>
 					</Panel>
 					<Panel id={PANEL_CYCLE_LENGTH} className="MobileContainer__panel">
 						<CycleLength/>

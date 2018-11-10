@@ -28,6 +28,9 @@ export default function ru() {
 			status_1:"Вы подписаны",
 			status_2:"Запрещено",
 			friend_list: "Ваши друзья",
+			menstruation:"Месячные",
+			current_cycle: "Текущий цикл",
+			x_day: "{{x}} день"
         }
     }
 }

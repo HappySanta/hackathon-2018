@@ -1,0 +1,23 @@
+.MainScreen {
+
+	&__days {
+		height: 50px;
+		margin-bottom: 20px;
+	}
+
+	&__title {
+		text-align: center;
+		text-transform: uppercase;
+		color: #FFF;
+		font-size: 15px;
+	}
+
+	&__day {
+		text-align: center;
+		text-transform: uppercase;
+		color: #FFF;
+		font-size: 52px;
+		line-height: 52px;
+	}
+
+}
