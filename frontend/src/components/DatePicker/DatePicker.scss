@@ -35,6 +35,9 @@
 		input {
 			height: 56px;
 			width: 100%;
+			display: block;
+			-webkit-appearance: none;
+			box-sizing: border-box;
 		}
 	}
 }
