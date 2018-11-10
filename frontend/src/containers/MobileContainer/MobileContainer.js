@@ -3,7 +3,14 @@ import {connect} from 'react-redux'
 import {removeFatalError} from "../../modules/FatalErrorModule"
 import L from "../../lang/L"
 import {
-	getRouteByPath, PANEL_MAIN, popPage, VIEW_MAIN,
+	getRouteByPath,
+	PANEL_BDATE,
+	PANEL_CYCLE_LENGTH,
+	PANEL_MAIN,
+	PANEL_MENSTRUATED_AT,
+	PANEL_MENSTRUATION_LENGTH,
+	popPage,
+	VIEW_MAIN,
 } from "../../modules/PageModule"
 import {withRouter} from "react-router"
 import Error from "../../components/Error/Error"
@@ -13,6 +20,12 @@ import {Root, View, Panel, PanelHeader, HeaderButton, platform, IOS} from '@vkon
 import '@vkontakte/vkui/dist/vkui.css'
 import Calendar from "../../components/Calendar/Calendar"
 import moment from "moment"
+import './MobileContainer.css'
+import ScreenSpinner from "../../components/ScreenSpinner/ScreenSpinner"
+import CycleLength from "../../components/Timing/CycleLength"
+import MenstruationLength from "../../components/Timing/MenstruationLength"
+import MenstruatedAt from "../../components/Timing/MenstruatedAt"
+import Bdate from "../../components/Timing/Bdate"
 
 const osName = platform()
 
@@ -46,7 +59,7 @@ class MobileContainer extends Component {
 	}
 
 	getPanelHeight() {
-		return osName === IOS ? 44 : 56
+		return 0 //osName === IOS ? 44 : 56
 	}
 
 	getAndroidVersion() {
@@ -94,8 +107,12 @@ class MobileContainer extends Component {
 	}
 
 	render() {
-		if (this.props.fatal) {
-			return <Error error={this.props.fatal} onClose={() => this.props.removeFatalError()}/>
+		const {fatal, location, loaded} = this.props
+		if (fatal) {
+			return <Error error={fatal} onClose={() => this.props.removeFatalError()}/>
+		}
+		if (!loaded) {
+			return <ScreenSpinner/>
 		}
 		if ((this.getAndroidVersion() && this.getAndroidVersion() <= 4) || (this.getIosVersion() && this.getIosVersion() <= 8)) {
 			return <div className="not-supported" style={{
@@ -111,22 +128,35 @@ class MobileContainer extends Component {
 				</div>
 			</div>
 		}
-		let route = getRouteByPath(this.props.location.pathname)
-		return <Root activeView={route.getView()}>
-			<View id={VIEW_MAIN} activePanel={route.panelName}>
-				<Panel id={PANEL_MAIN}>
-					<PanelHeader>My App</PanelHeader>
-					<Calendar month={moment()}/>
-					<Calendar month={moment().add(1, 'month')}/>
-				</Panel>
-			</View>
-		</Root>
+		let route = getRouteByPath(location.pathname)
+		return <div className="MobileContainer">
+			<Root activeView={route.getView()}>
+				<View id={VIEW_MAIN} activePanel={route.panelId}>
+					<Panel id={PANEL_MAIN}>
+						Main
+					</Panel>
+					<Panel id={PANEL_CYCLE_LENGTH} className="MobileContainer__panel">
+						<CycleLength/>
+					</Panel>
+					<Panel id={PANEL_MENSTRUATION_LENGTH} className="MobileContainer__panel">
+						<MenstruationLength/>
+					</Panel>
+					<Panel id={PANEL_MENSTRUATED_AT} className="MobileContainer__panel">
+						<MenstruatedAt/>
+					</Panel>
+					<Panel id={PANEL_BDATE} className="MobileContainer__panel">
+						<Bdate/>
+					</Panel>
+				</View>
+			</Root>
+		</div>
 	}
 }
 
 function mapStateToProps(state) {
 	return {
 		fatal: state.FatalErrorModule,
+		loaded: state.BootstrapModule.loaded,
 	}
 }
 

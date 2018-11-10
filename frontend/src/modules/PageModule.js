@@ -4,7 +4,12 @@ const SET_PAGE = "Page.SET_PAGE"
 const SET_PARAMS = 'Page.SET_PARAMS'
 
 export const VIEW_MAIN = 'view_main'
+
 export const PANEL_MAIN = '/'
+export const PANEL_CYCLE_LENGTH = '/cycle_length'
+export const PANEL_MENSTRUATION_LENGTH = '/menstruation_length'
+export const PANEL_MENSTRUATED_AT = '/menstruated_at'
+export const PANEL_BDATE = '/bdate'
 
 
 const initState = {
@@ -13,22 +18,28 @@ const initState = {
 
 export class Route {
 
-	panelName = ''
+	panelId = ''
 
-	static fromRaw(panelName) {
+	static fromRaw(panelId) {
 		let route = new Route()
-		route.panelName = panelName
+		route.panelId = panelId
 		return route
 	}
 
 	getView() {
-		let view = getPanelViewMap()[this.panelName]
+		let view = getPanelViewMap()[this.panelId]
 		return view ? view : VIEW_MAIN
 	}
 }
 
 function getPanelViewMap() {
-	return {}
+	let map = {}
+	map[PANEL_MAIN] = VIEW_MAIN
+	map[PANEL_CYCLE_LENGTH] = VIEW_MAIN
+	map[PANEL_MENSTRUATION_LENGTH] = VIEW_MAIN
+	map[PANEL_MENSTRUATED_AT] = VIEW_MAIN
+	map[PANEL_BDATE] = VIEW_MAIN
+	return map
 }
 
 const PageModule = (state = initState, action) => {
@@ -45,7 +56,7 @@ const PageModule = (state = initState, action) => {
 
 export function pushPage(name, params = undefined) {
 	return (dispatch, getState) => {
-		let currentParams = getState().Page.params
+		let currentParams = getState().PageModule.params
 		if (params) {
 			dispatch(setPageParams(params))
 		} else if (!params && Object.keys(currentParams).length) {
@@ -74,17 +85,17 @@ export function subscribeToHistory(history) {
 export function handleLocation(pathname) {
 	return dispatch => {
 		let route = getRouteByPath(pathname)
-		switch (route.panelName) {
-			case PANEL_MAIN:
-				dispatch(bootstrap())
-				break
-			default:
+		const resolve = () => {
+			switch (route.panelId) {
+				default:
+			}
 		}
-    }
+		dispatch(bootstrap(resolve))
+	}
 }
 
-export function getPathByPanelName(panelName) {
-	return panelName
+export function getPathByPanelId(panelId) {
+	return panelId
 }
 
 export function getRouteByPath(path) {

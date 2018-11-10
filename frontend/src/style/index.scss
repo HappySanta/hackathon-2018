@@ -3,11 +3,11 @@
 body {
 	margin: 0;
 	padding: 0;
-	background: #FFF;
+	background: #FFCBD3;
 	color: #000;
 	direction: ltr;
 	font-size: $primary-font-size;
-	font-family: -apple-system, BlinkMacSystemFont, Roboto, Open Sans, Helvetica Neue, sans-serif;
+	font-family: TT Commons, BlinkMacSystemFont, Roboto, Open Sans, Helvetica Neue, sans-serif;
 	line-height: $primary-line-height;
 	font-weight: 400;
 	-webkit-font-smoothing: antialiased;
@@ -19,6 +19,13 @@ input {
 	margin: 0;
 }
 
+:root {
+	background: #FFCBD3;
+	--background_page: #FFCBD3;
+	--font-ios: TT Commons, BlinkMacSystemFont, Roboto, Open Sans, Helvetica Neue, sans-serif;
+	--font-android: TT Commons, BlinkMacSystemFont, Roboto, Open Sans, Helvetica Neue, sans-serif;
+	--font-common: TT Commons, BlinkMacSystemFont, Roboto, Open Sans, Helvetica Neue, sans-serif;
+}
 
 .plak-wrapper {
 	position: absolute;
@@ -39,5 +46,105 @@ input {
 	color: #71757A;
 	text-align: center;
 	line-height: 20px;
+}
+
+select {
+	font-family: TT Commons, BlinkMacSystemFont, Roboto, Open Sans, Helvetica Neue, sans-serif;
+	outline: none;
+	border: none;
+	margin: 0;
+	padding: 0;
+	background-color: transparent;
+}
+
+.Btn {
+	width: 100%;
+	background: #1F1819;
+	font-size: 17px;
+	color: #FFFFFF;
+	text-align: center;
+	font-weight: 500;
+	padding: 12px 16px 11px 16px;
+	border-radius: 10px;
+	border: none;
+	zoom: 1;
+	cursor: pointer;
+	white-space: nowrap;
+	-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+	outline: none;
+	font-family: TT Commons, BlinkMacSystemFont, Roboto, Open Sans, Helvetica Neue, sans-serif;
+	text-decoration: none;
+	box-sizing: border-box;
+	font-style: normal;
+	margin: 0;
+
+	&.mobile {
+		font-size: 15px;
+		font-weight: 500;
+		border-radius: 8px;
+	}
+
+	&:hover {
+		background-color: #1F1819;
+	}
+
+	&:active {
+		background-color: #1F1819;
+	}
+
+	&--primary {
+		background: #1F1819;
+		color: #FFFFFF;
+		&:hover {
+			color: #FFFFFF;
+			background: #1F1819;
+		}
+		&:active {
+			color: #FFFFFF;
+			background: #1F1819;
+		}
+		&:visited {
+			color: #FFFFFF;
+		}
+	}
+
+	&--disabled, &:disabled {
+		font-size: 15px;
+		color: #71757A;
+		background: #F0F3F7;
+		border: 0.5px solid  #E7E8EC;
+
+		&:hover, &:active {
+			background: #F0F3F7;
+			color: #71757A;
+		}
+	}
+
+	&--light {
+		background: #DFE6ED;
+		color: #55677D;
+		&:hover {
+			background: #D3DCE6;
+		}
+
+		&.mobile {
+			color: #45678F;
+			background: rgba(0,57,115,0.10);
+		}
+	}
+
+	&--white {
+		background: none;
+		color: #2A5885;
+	}
+
+	&.selected {
+		background: #BBC9D8;
+	}
+
+	&--wait {
+		background: #5E81A8;
+		color: rgba(255, 255, 255, 0);
+	}
 }
 
