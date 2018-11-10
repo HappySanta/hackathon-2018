@@ -23,6 +23,15 @@ export default function ru() {
 			month_10:"Октябрь",
 			month_11:"Ноябрь",
 			month_12:"Декабрь",
+			request_data: "Подписаться",
+			show_data: "Перейти",
+			status_0:"Разрешение запроцено",
+			status_1:"Вы подписаны",
+			status_2:"Запрещено",
+			friend_list: "Ваши друзья",
+			menstruation:"Месячные",
+			current_cycle: "Текущий цикл",
+			x_day: "{{x}} день"
         }
     }
 }

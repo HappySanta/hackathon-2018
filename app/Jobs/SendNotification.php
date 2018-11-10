@@ -19,6 +19,13 @@ class SendNotification implements ShouldQueue
     protected $message;
     protected $fragment;
     protected $retry = 0;
+
+    public static function UserWantKnowNotification($userId, $name) {
+        $msg = "{$name} хочет знать когда что";
+
+        return new self([$userId], $msg, "requests");
+    }
+
     public function __construct(array $userIds, string $message, string $fragment = "from_notify", int $retry = 0)
     {
         $this->userIds = $userIds;

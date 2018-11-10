@@ -11,6 +11,7 @@ import {ConnectedRouter} from "react-router-redux"
 import {handleLocation, subscribeToHistory} from "./modules/PageModule"
 import Error from "./components/Error/Error"
 import registerServiceWorker from "./registerServiceWorker"
+import {LoadFriends} from "./modules/FriendModule"
 
 VkConnect.send("VKWebAppInit", {})
 /**
@@ -20,6 +21,7 @@ let startParams = VkSdk.getStartParams()
 L.init(startParams.getLangCode()).then(() => {
 	store.dispatch(subscribeToHistory(history))
 	store.dispatch(handleLocation(history.location.pathname))
+	store.dispatch(LoadFriends())
 	mount(<Provider store={store}>
 		<ConnectedRouter history={history}>
 			<MobileContainer/>

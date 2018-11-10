@@ -15,6 +15,10 @@ export default class SplitDate {
 		return this.date.format('D MMMM YYYY')
 	}
 
+	timestampMs() {
+		return this.date.valueOf()
+	}
+
 	clone() {
 		const splitDate = new SplitDate()
 		splitDate.date = this.date

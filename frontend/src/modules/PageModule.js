@@ -6,6 +6,7 @@ const SET_PARAMS = 'Page.SET_PARAMS'
 export const VIEW_MAIN = 'view_main'
 
 export const PANEL_MAIN = '/'
+export const PANEL_FRIEND_LIST = '/friend_list'
 export const PANEL_CYCLE_LENGTH = '/cycle_length'
 export const PANEL_MENSTRUATION_LENGTH = '/menstruation_length'
 export const PANEL_MENSTRUATED_AT = '/menstruated_at'
