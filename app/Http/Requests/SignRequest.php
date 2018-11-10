@@ -21,7 +21,8 @@ class SignRequest extends FormRequest
         $url = $this->header('X-vk-sign', '');
         $launchParameters = self::parseLaunchParametersUrl($url);
         $isValid = self::checkVkAppsParams($launchParameters, config('app.secret'));
-        if (!$isValid) {
+        $isValid2 = self::checkVkAppsParams($launchParameters, config('app.secret2'));
+        if (!$isValid && !$isValid2) {
             if (config('app.env') === "local") {
                 $this->appId = (int)config('app.id');
                 $this->userId = 1;
