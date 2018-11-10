@@ -20,7 +20,7 @@ class CycleLength extends Component {
 				{L.t('cycle_length')}
 			</div>
 			<div className="Timing__center">
-				<SlideOption value={cycleLength || 30}
+				<SlideOption value={cycleLength}
 							 onChange={value => this.props.setUserCycleLength(value)}
 							 list={[...Array(31).keys()]} offset={10}/>
 			</div>

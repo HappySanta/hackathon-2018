@@ -20,7 +20,7 @@ class MenstruationLength extends Component {
 				{L.t('menstruation_length')}
 			</div>
 			<div className="Timing__center">
-				<SlideOption value={menstruationLength || 5}
+				<SlideOption value={menstruationLength}
 							 onChange={value => this.props.setUserMenstruationLength(value)}
 							 list={[...Array(11).keys()]} offset={1}/>
 			</div>

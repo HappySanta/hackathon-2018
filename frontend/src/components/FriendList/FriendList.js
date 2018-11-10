@@ -2,13 +2,12 @@ import React, {Component} from "react"
 import {connect} from "react-redux"
 import {Group, Cell, Avatar, Button} from '@vkontakte/vkui'
 import "./FriendList.css"
-import FriendModule, {RequestSubscribe} from "../../modules/FriendModule"
+import {RequestSubscribe} from "../../modules/FriendModule"
 import L from "../../lang/L"
 
 const STATUS_NONE = -1
 export const STATUS_WAIT = 0
 const STATUS_OK = 1
-const STATUS_DECLINE = 2
 
 class FriendList extends Component {
 

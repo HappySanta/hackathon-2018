@@ -1,5 +1,5 @@
 import {goBack, push, replace} from "react-router-redux"
-import {bootstrap} from "./BootstrapModule"
+import {bootstrap, setBootstrap} from "./BootstrapModule"
 const SET_PAGE = "Page.SET_PAGE"
 const SET_PARAMS = 'Page.SET_PARAMS'
 
@@ -12,6 +12,10 @@ export const PANEL_MENSTRUATION_LENGTH = '/menstruation_length'
 export const PANEL_MENSTRUATED_AT = '/menstruated_at'
 export const PANEL_BDATE = '/bdate'
 
+
+function getTimingPanels() {
+	return [PANEL_CYCLE_LENGTH, PANEL_MENSTRUATION_LENGTH, PANEL_MENSTRUATED_AT, PANEL_BDATE]
+}
 
 const initState = {
 	params: {}
@@ -84,18 +88,26 @@ export function subscribeToHistory(history) {
 }
 
 export function handleLocation(pathname) {
-	return dispatch => {
+	return (dispatch, getState) => {
 		let route = getRouteByPath(pathname)
 		const resolve = (r) => {
-			if (r && !r.user) {
-				if (route.panelId !== PANEL_CYCLE_LENGTH) {
-					dispatch(replacePage(PANEL_CYCLE_LENGTH))
-					return
+			if (r) {
+				if (!r.user) {
+					if (route.panelId !== PANEL_CYCLE_LENGTH) {
+						dispatch(replacePage(PANEL_CYCLE_LENGTH))
+						return
+					}
 				}
+			}
+			let {id} = getState().UserModule
+			if (id && getTimingPanels().indexOf(route.panelId) !== -1) {
+				dispatch(replacePage(PANEL_MAIN))
+				return
 			}
 			switch (route.panelId) {
 				default:
 			}
+			dispatch(setBootstrap({loaded: true}))
 		}
 		dispatch(bootstrap(resolve))
 	}

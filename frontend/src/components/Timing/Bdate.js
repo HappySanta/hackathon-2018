@@ -2,19 +2,22 @@ import React, {Component} from "react"
 import {connect} from "react-redux"
 import "./Timing.css"
 import L from "../../lang/L"
-import {setUserBdate} from "../../modules/UserModule"
+import {createUser, setUserBdate} from "../../modules/UserModule"
 import {FixedLayout} from '@vkontakte/vkui'
 import {getPathByPanelId, PANEL_MAIN, pushPage} from "../../modules/PageModule"
 import DatePicker from "../DatePicker/DatePicker"
+import WaitDots from "../WaitDots/WaitDots"
 
 class MenstruatedAt extends Component {
 
 	toMain() {
-		this.props.pushPage(getPathByPanelId(PANEL_MAIN))
+		this.props.createUser(() => {
+			this.props.pushPage(getPathByPanelId(PANEL_MAIN))
+		})
 	}
 
 	render() {
-		const {bdate} = this.props
+		const {bdate, loading} = this.props
 		return <div className="Timing">
 			<div className="Timing__title">
 				{L.t('bdate')}
@@ -25,7 +28,7 @@ class MenstruatedAt extends Component {
 			<FixedLayout vertical="bottom">
 				<div className="Timing__bottom-single" onClick={() => this.toMain()}>
 					<button className="Btn">
-						{L.t('next')}
+						{!loading ? L.t('next') : <WaitDots/>}
 					</button>
 				</div>
 			</FixedLayout>
@@ -35,8 +38,9 @@ class MenstruatedAt extends Component {
 
 function map(state) {
 	return {
-		bdate: state.UserModule.bdate
+		bdate: state.UserModule.bdate,
+		loading: state.UserModule.loading,
 	}
 }
 
-export default connect(map, {setUserBdate, pushPage})(MenstruatedAt)
+export default connect(map, {setUserBdate, pushPage, createUser})(MenstruatedAt)

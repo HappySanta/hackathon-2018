@@ -1,10 +1,13 @@
 import User from "../entities/User"
 import SplitDate from "../entities/SplitDate"
+import Backend from "../tools/Backend"
+import {setFatalError} from "./FatalErrorModule"
 
 const initState = User.fromRaw({})
 
 const SET_USER = 'UserModule.SET_USER'
 const RESET_USER = 'UserModule.RESET_USER'
+const INIT_USER = 'UserModule.INIT_USER'
 
 const UserModule = (state = initState, action) => {
 	switch (action.type) {
@@ -14,9 +17,15 @@ const UserModule = (state = initState, action) => {
 			return user
 		case RESET_USER:
 			return initState
+		case INIT_USER:
+			return action.user
 		default:
 			return state
 	}
+}
+
+export function initUser(user) {
+	return {type: INIT_USER, user}
 }
 
 export function setUser(callback) {
@@ -41,6 +50,27 @@ export function setUserMenstruatedAt(menstruatedAt) {
 
 export function setUserBdate(bdate) {
 	return setUser(user => user.bdate = bdate)
+}
+
+export function setUserLoading(loading) {
+	return setUser(user => user.loading = loading)
+}
+
+export function createUser(onSuccess) {
+	return (dispatch, getState) => {
+		let user = getState().UserModule
+		dispatch(setUserLoading(true))
+		Backend.request('v1/user', user.toRaw(), "POST").then(response => {
+			dispatch(setUserLoading(false))
+			dispatch(initUser(User.fromRaw(response)))
+			if (onSuccess) {
+				onSuccess(response)
+			}
+		}).catch(e => {
+			dispatch(setUserLoading(false))
+			setFatalError(e)
+		})
+	}
 }
 
 export default UserModule

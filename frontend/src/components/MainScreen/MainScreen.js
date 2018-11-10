@@ -1,6 +1,5 @@
 import React, {Component} from "react"
 import {connect} from "react-redux"
-import PropTypes from "prop-types"
 import "./MainScreen.css"
 import {GetDayOfCycle} from "../../tools/helpers"
 import L from "../../lang/L"
@@ -22,10 +21,6 @@ class MainScreen extends Component {
 			<div className="MainScreen__day">{L.t('x_day', {x:dayOfCycle+1})}</div>
 		</div>
 	}
-}
-
-MainScreen.propTypes = {
-	
 }
 
 function map(state) {

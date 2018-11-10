@@ -1,8 +1,7 @@
 import Backend from "../tools/Backend"
 import {setFatalError} from "./FatalErrorModule"
-import {setUser} from "./UserModule"
+import {initUser} from "./UserModule"
 import User from "../entities/User"
-import {PANEL_CYCLE_LENGTH, replacePage} from "./PageModule"
 
 export const SET_BOOTSTRAP = 'BootstrapModule.SET_BOOTSTRAP'
 
@@ -32,12 +31,11 @@ export function bootstrap(onSuccess) {
 		}
 		Backend.request('v1/bootstrap', {}).then(r => {
 			if (r.user) {
-				dispatch(setUser(User.fromRaw(r.user)))
+				dispatch(initUser(User.fromRaw(r.user)))
 			}
-			dispatch(setBootstrap({loaded: true}))
 			onSuccess(r)
 		}).catch(e => {
-			setFatalError(e)
+			dispatch(setFatalError(e))
 		})
 	}
 }

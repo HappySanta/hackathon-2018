@@ -1,4 +1,5 @@
 import SplitDate from "./SplitDate"
+import moment from "moment/moment"
 
 export default class User {
 
@@ -7,6 +8,7 @@ export default class User {
 	menstruationLength
 	menstruatedAt
 	bdate
+	loading = false
 
 	getStringCycleLength() {
 		return this.cycleLength ? '' + this.cycleLength : ''
@@ -19,13 +21,25 @@ export default class User {
 	static fromRaw(raw) {
 		const user = new User()
 		user.id = raw.id || 0
-		user.cycleLength = raw.cycle_length || 0
-		user.menstruationLength = raw.menstruation_length || 0
-		user.menstruatedAt = SplitDate.fromRaw(raw.menstruated_at)
-		user.bdate = SplitDate.fromRaw(raw.bdate)
+		user.cycleLength = raw.cycle_length || 30
+		user.menstruationLength = raw.menstruation_length || 5
+		user.menstruatedAt = raw.menstruated_at
+			? SplitDate.fromRaw(raw.menstruated_at) : SplitDate.fromRaw(moment().unix())
+		user.bdate = raw.bdate
+			? SplitDate.fromRaw(raw.bdate) : SplitDate.fromRaw(moment().unix())
 		return user
 	}
-	t
+
+	toRaw() {
+		return {
+			id: this.id,
+			cycle_length: this.cycleLength,
+			menstruation_length: this.menstruationLength,
+			menstruated_at: this.menstruatedAt.timestamp(),
+			bdate: this.bdate.timestamp(),
+		}
+	}
+
 	clone() {
 		const user = new User()
 		user.id = this.id
@@ -33,6 +47,7 @@ export default class User {
 		user.menstruationLength = this.menstruationLength
 		user.menstruatedAt = this.menstruatedAt.clone()
 		user.bdate = this.bdate.clone()
+		user.loading = this.loading
 		return user
 	}
 }
