@@ -19,6 +19,7 @@ import Bdate from "../Timing/Bdate"
 import FriendList from "../FriendList/FriendList"
 import {classNames} from "../../tools/helpers"
 import L from "../../lang/L"
+import DayState from "../DayState/DayState"
 
 const PANEL_ACTIVITY = "activity"
 const PANEL_FRIENDS = "friends"
@@ -39,6 +40,12 @@ class DayActivity extends Component {
 		className={className}>{L.t("main_tab_" + name)}</div>
 	}
 
+	renderContent() {
+		if (this.state.activePanel === PANEL_ACTIVITY) {
+			return <DayState/>
+		}
+	}
+
 	render() {
 		return <div className="DayActivity">
 			<div className="DayActivity__tab-list">
@@ -47,7 +54,7 @@ class DayActivity extends Component {
 				{this.tab(PANEL_ADVICE)}
 			</div>
 			<div className="DayActivity__content">
-
+				{this.renderContent()}
 			</div>
 		</div>
 	}
