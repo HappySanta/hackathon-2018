@@ -4,6 +4,7 @@ import "./CalendarScreen.css"
 import Calendar from "../Calendar/Calendar"
 import moment from "moment"
 import L from "../../lang/L"
+import Footer from "../Footer/Footer"
 
 class CalendarScreen extends Component {
 

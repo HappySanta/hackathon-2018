@@ -6,6 +6,7 @@ import L from "../../lang/L"
 import DayList from "../DayList/DayList"
 import DayActivity from "../DayActivity/DayActivity"
 import {setUserSelectedDate} from "../../modules/UserModule"
+import Footer from "../Footer/Footer"
 
 class MainScreen extends Component {
 

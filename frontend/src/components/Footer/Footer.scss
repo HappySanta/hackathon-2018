@@ -1,0 +1,51 @@
+.FooterEx {
+	position: fixed;
+	z-index: 1000;
+	background-color: #FFF;
+	height: 49px;
+	left:0;
+	right: 0;
+	bottom:0;
+	display: flex;
+
+	box-shadow: 0 0 10px 0px rgba(0,0,0,0.12);
+
+	&:after {
+		position: absolute;
+		left: 0; right: 0;
+		top: 49px;
+		height: 50px;
+		background-color: #FFF;
+		content: "";
+	}
+
+	&__icon {
+		flex-grow: 1;
+		text-align: center;
+		height: 49px;
+
+		&--main {
+			background-image: url("./main-on.svg");
+			background-position: center center;
+			background-repeat: no-repeat;
+		}
+
+		&--main-off {
+			background-image: url("./main-off.svg");
+			background-position: center center;
+			background-repeat: no-repeat;
+		}
+
+		&--calendar {
+			background-image: url("./calendar-on.svg");
+			background-position: center center;
+			background-repeat: no-repeat;
+		}
+
+		&--calendar-off {
+			background-image: url("./calendar-off.svg");
+			background-position: center center;
+			background-repeat: no-repeat;
+		}
+	}
+}
