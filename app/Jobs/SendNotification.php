@@ -66,7 +66,7 @@ class SendNotification implements ShouldQueue
             "message" => $message,
             "fragment" => $fragment,
             "v" => "5.87",
-            "access_token" => config("app.vk_service_token")
+            "access_token" => config("app.service")
         ]);
     }
 }

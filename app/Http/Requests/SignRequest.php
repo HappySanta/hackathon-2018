@@ -22,11 +22,17 @@ class SignRequest extends FormRequest
         $launchParameters = self::parseLaunchParametersUrl($url);
         $isValid = self::checkVkAppsParams($launchParameters, config('app.secret'));
         if (!$isValid) {
+            if (config('app.env') === "local") {
+                $this->appId = (int)config('app.id');
+                $this->userId = 1;
+                $this->groupId = 0;
+                return true;
+            }
             return false;
         }
-        $this->appId = $launchParameters['vk_app_id'];
-        $this->userId = $launchParameters['vk_user_id'];
-        $this->groupId = !empty($launchParameters['vk_group_id']) ? $launchParameters['vk_group_id'] : 0;
+        $this->appId = (int)$launchParameters['vk_app_id'];
+        $this->userId = (int)$launchParameters['vk_user_id'];
+        $this->groupId = !empty($launchParameters['vk_group_id']) ? (int)$launchParameters['vk_group_id'] : 0;
         return true;
 
     }

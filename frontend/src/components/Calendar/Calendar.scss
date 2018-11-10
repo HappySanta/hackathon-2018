@@ -1,0 +1,19 @@
+.Calendar {
+	padding: 5px;
+	&__table {
+		background-color: #FFF;
+		width: 100%;
+		text-align: center;
+	}
+
+	&__day {
+		padding: 5px 3px;
+		&--not-same {
+			opacity: 0.5;
+		}
+	}
+
+	&__month-name {
+		padding-bottom: 10px;
+	}
+}
