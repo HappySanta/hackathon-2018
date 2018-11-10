@@ -32,7 +32,8 @@
 		"build-js": "react-scripts build",
 		"build": "npm-run-all build-css build-js",
 		"eject": "react-scripts eject",
-		"deploy": "npm run build"
+		"deploy": "npm-run-all build copy-to-production",
+		"copy-to-production":"scp -r build/static/ dp@web5.vkforms.ru:/var/www/hack.w5.vkforms.ru/public/app&& scp build/*.js build/*.json dp@web5.vkforms.ru:/var/www/hack.w5.vkforms.ru/public/app&& scp build/*.html dp@web5.vkforms.ru:/var/www/hack.w5.vkforms.ru/public/app"
 	},
 	"proxy": {
 		"/app": {
