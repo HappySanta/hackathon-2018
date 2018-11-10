@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Responses\OkResponse;
 use App\Models\DailyState;
 use App\Models\User;
+use Carbon\Carbon;
 
 class BootstrapController extends Controller
 {
@@ -16,6 +17,7 @@ class BootstrapController extends Controller
         return new OkResponse([
             'user' => $user,
             'schema' => DailyState::getSchema(),
+            'state' => DailyState::getUserStatePerDay($request->userId, Carbon::now()->getTimestamp())
         ]);
     }
 }
