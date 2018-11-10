@@ -6,6 +6,7 @@ use App\Http\Requests\SignRequest;
 use App\Http\Responses\OkResponse;
 use App\Jobs\SendNotification;
 use App\Models\User;
+use Illuminate\Database\QueryException;
 use Vk\Executor;
 
 class FriendController extends Controller
@@ -18,32 +19,6 @@ class FriendController extends Controller
         $statuses = \DB::table('t_friend_relation')
             ->where('user_id', $request->userId)->get();
 
-        if ($statuses->count() === 0) {
-            \DB::table('t_friend_relation')->insert([
-                [
-                    'user_id' => $request->userId,
-                    'friend_id' => -1,
-                    'status' => -1
-                ],
-                [
-                    'user_id' => $request->userId,
-                    'friend_id' => -2,
-                    'status' => -1
-                ]
-            ]);
-
-            $friendList[] = [
-                'id' => -1,
-                'status' => -1,
-            ];
-
-            $friendList[] = [
-                'id' => -2,
-                'status' => -1,
-            ];
-        }
-
-
         $skipIds = [];
         foreach ($statuses as $status) {
             $friendList[] = [
@@ -51,6 +26,20 @@ class FriendController extends Controller
                 'status' => $status->status
             ];
             $skipIds[] = $status->friend_id;
+        }
+
+        if (!in_array(-1, $skipIds)) {
+            $friendList[] = [
+                'id' => -1,
+                'status' => -1,
+            ];
+        }
+
+        if (!in_array(-2, $skipIds)) {
+            $friendList[] = [
+                'id' => -2,
+                'status' => -1,
+            ];
         }
 
         $result = Executor::api("friends.get", [
@@ -105,6 +94,9 @@ class FriendController extends Controller
             return $data['id'];
         }, $friendList);
 
+        $vkUserIds = array_filter($vkUserIds, function($id) {return $id > 0;});
+        $vkUserIds[] = 1;
+
         $userDataResult = Executor::api('users.get', [
             'user_ids' => implode(',', $vkUserIds),
             'fields' => 'photo_200',
@@ -116,13 +108,13 @@ class FriendController extends Controller
             $userDataIndex = [
                 -1 => [
                     'first_name' => "Гаечка",
-                    'photo_200' => "http://",
+                    'photo_200' => "https://pp.userapi.com/c638616/v638616376/4b71e/f3BQaQsgqQ0.jpg?ava=1",
                     'last_name' => ""
                 ],
                 -2 => [
-                    'first_name' => "Гаечка",
-                    'photo_200' => "http://",
-                    'last_name' => ""
+                    'first_name' => "Шишка",
+                    'photo_200' => "https://pp.userapi.com/c851228/v851228980/3e08f/By4YsTDHamk.jpg?ava=1",
+                    'last_name' => "Братишка"
                 ]
             ];
             foreach ($userDataResult->getData() as $user) {
@@ -171,8 +163,7 @@ class FriendController extends Controller
         $name = (string)$request->get('name', "");
         $user = User::find($friendId);
 
-        if ($user instanceof User) {
-
+        if ($user instanceof User || $friendId<0) {
             try {
                 \DB::table('t_friend_relation')->insert([
                     'user_id' => $request->userId,
@@ -180,6 +171,8 @@ class FriendController extends Controller
                     'status' => 0
                 ]);
                 $this->dispatch(SendNotification::UserWantKnowNotification($friendId, $name));
+            } catch (QueryException $e) {
+                // It's ok
             } catch (\Exception $e) {
                 \Log::error($e);
             }
