@@ -5,8 +5,8 @@ import "./ScreenSpinner.css"
 export default class ScreenSpinner extends Component {
 
 	render() {
-		return <div className="ScreenSpinner">
-			<div style={{ height: 100 }}>
+		return <div className="ScreenSpinner" style={{minHeight: this.props.h}}>
+			<div className="ScreenSpinner__inner">
 				<VkSpinner/>
 			</div>
 		</div>

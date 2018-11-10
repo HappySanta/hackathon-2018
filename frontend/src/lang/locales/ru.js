@@ -49,6 +49,10 @@ export default function ru() {
 			main_tab_activity: "Состояние",
 			main_tab_friends: "Друзья",
 			main_tab_advice: "Советы",
+
+			my_days_0: "день",
+			my_days_1: "дня",
+			my_days_2: "дней",
         }
     }
 }

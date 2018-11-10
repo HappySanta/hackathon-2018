@@ -1,5 +1,6 @@
 import React, {Component} from "react"
 import "./SlideOption.css"
+import L from "../../lang/L"
 
 export default class SlideOption extends Component {
 
@@ -14,9 +15,12 @@ export default class SlideOption extends Component {
 		return <div className="SlideOption">
 			<div className="SlideOption__wrapper">
 				<div className="SlideOption__visible">
-					<span className="SlideOption__selected-value">
+					<div className="SlideOption__selected-value">
 						{value}
-					</span>
+					</div>
+					<div className="SlideOption__days">
+						{L.t('my_days', {count: parseInt(value, 10)})}
+					</div>
 				</div>
 				<div className="SlideOption__invisible">
 					<select className="SlideOption__select" defaultValue={value}

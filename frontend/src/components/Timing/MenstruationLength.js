@@ -4,13 +4,17 @@ import "./Timing.css"
 import L from "../../lang/L"
 import {setUserMenstruationLength} from "../../modules/UserModule"
 import {FixedLayout} from '@vkontakte/vkui'
-import {getPathByPanelId, PANEL_MENSTRUATED_AT, pushPage} from "../../modules/PageModule"
+import {getPathByPanelId, PANEL_MENSTRUATED_AT, popPage, pushPage} from "../../modules/PageModule"
 import SlideOption from "../SlideOption/SlideOption"
 
 class MenstruationLength extends Component {
 
 	toMenstruatedAt() {
 		this.props.pushPage(getPathByPanelId(PANEL_MENSTRUATED_AT))
+	}
+
+	back() {
+		this.props.popPage()
 	}
 
 	render() {
@@ -25,14 +29,14 @@ class MenstruationLength extends Component {
 							 list={[...Array(11).keys()]} offset={1}/>
 			</div>
 			<FixedLayout vertical="bottom">
-				<div className="Timing__bottom-double" onClick={() => this.toMenstruatedAt()}>
+				<div className="Timing__bottom-double">
 					<div>
-						<button className="Btn Timing__button-next">
+						<button className="Btn Timing__button-next" onClick={() => this.toMenstruatedAt()}>
 							{L.t('next')}
 						</button>
 					</div>
 					<div>
-						<button className="Btn Btn--light">
+						<button className="Btn Btn--light" onClick={() => this.back()}>
 							{L.t('back')}
 						</button>
 					</div>
@@ -48,4 +52,4 @@ function map(state) {
 	}
 }
 
-export default connect(map, {setUserMenstruationLength, pushPage})(MenstruationLength)
+export default connect(map, {setUserMenstruationLength, pushPage, popPage})(MenstruationLength)

@@ -112,7 +112,7 @@ class MobileContainer extends Component {
 			return <Error error={fatal} onClose={() => this.props.removeFatalError()}/>
 		}
 		if (!loaded) {
-			return <ScreenSpinner/>
+			return <ScreenSpinner h={MobileContainer.deviceHeight}/>
 		}
 		if ((this.getAndroidVersion() && this.getAndroidVersion() <= 4) || (this.getIosVersion() && this.getIosVersion() <= 8)) {
 			return <div className="not-supported" style={{
