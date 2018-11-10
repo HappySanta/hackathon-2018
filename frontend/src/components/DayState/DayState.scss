@@ -1,0 +1,46 @@
+.DayState {
+	&__category {
+		border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+		&:last-child {
+			border-bottom: none;
+		}
+	}
+	&__category-name {
+		font-size: 16px;
+		line-height: 19px;
+		font-weight: 600;
+		color: #000;
+		padding-top: 19px;
+		padding-left: 14px;
+	}
+	&__category-items {
+		padding: 11px 16px 20px;
+		max-width: 100%;
+		min-width: 100%;
+		overflow: auto;
+		-webkit-overflow-scrolling: touch;
+		font-size: 0;
+		line-height: 0;
+		white-space: nowrap;
+		box-sizing: border-box;
+	}
+	&__item {
+		display: inline-block;
+		background-color: rgba(0, 57, 115, 0.1);
+		color: #45678F;
+		padding: 9px 14px 7px;
+		font-size: 15px;
+		line-height: 18px;
+		font-weight: 500;
+		margin-right: 8px;
+		vertical-align: middle;
+		border-radius: 10px;
+		&:last-child {
+			margin-right: 0;
+		}
+		&--active {
+			color: #FFF;
+			background-color: #5181B8;
+		}
+	}
+}

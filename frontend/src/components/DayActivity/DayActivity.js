@@ -1,24 +1,10 @@
 import React, {Component} from "react"
 import {connect} from "react-redux"
-import PropTypes from "prop-types"
-import "./DayActivity.css"
-import {
-	PANEL_BDATE,
-	PANEL_CYCLE_LENGTH, PANEL_FRIEND_LIST,
-	PANEL_MAIN,
-	PANEL_MENSTRUATED_AT,
-	PANEL_MENSTRUATION_LENGTH,
-	VIEW_MAIN
-} from "../../modules/PageModule"
-import {Panel, View} from "@vkontakte/vkui"
-import MainScreen from "../MainScreen/MainScreen"
-import CycleLength from "../Timing/CycleLength"
-import MenstruationLength from "../Timing/MenstruationLength"
-import MenstruatedAt from "../Timing/MenstruatedAt"
-import Bdate from "../Timing/Bdate"
-import FriendList from "../FriendList/FriendList"
 import {classNames} from "../../tools/helpers"
 import L from "../../lang/L"
+import DayState from "../DayState/DayState"
+import moment from "moment"
+import "./DayActivity.css"
 
 const PANEL_ACTIVITY = "activity"
 const PANEL_FRIENDS = "friends"
@@ -30,24 +16,42 @@ class DayActivity extends Component {
 		activePanel: PANEL_ACTIVITY
 	}
 
+	isFeatureDay() {
+		return this.props.selectedDate.isAfter(moment())
+	}
+
+	getActivePanel() {
+		if (this.isFeatureDay()) {
+			return PANEL_ADVICE
+		} else {
+			return this.state.activePanel
+		}
+	}
+
 	tab(name) {
 		const className = classNames({
 			"DayActivity__tab": true,
-			"DayActivity__tab--active": this.state.activePanel === name
+			"DayActivity__tab--active": this.getActivePanel() === name
 		})
 		return <div onClick={() => this.setState({activePanel:name})}
 		className={className}>{L.t("main_tab_" + name)}</div>
 	}
 
+	renderContent() {
+		if (this.getActivePanel() === PANEL_ACTIVITY) {
+			return <DayState/>
+		}
+	}
+
 	render() {
 		return <div className="DayActivity">
 			<div className="DayActivity__tab-list">
-				{this.tab(PANEL_ACTIVITY)}
-				{this.tab(PANEL_FRIENDS)}
+				{!this.isFeatureDay() && this.tab(PANEL_ACTIVITY)}
+				{!this.isFeatureDay() &&  this.tab(PANEL_FRIENDS)}
 				{this.tab(PANEL_ADVICE)}
 			</div>
 			<div className="DayActivity__content">
-
+				{this.renderContent()}
 			</div>
 		</div>
 	}
@@ -56,7 +60,9 @@ class DayActivity extends Component {
 DayActivity.propTypes = {}
 
 function map(state) {
-	return {}
+	return {
+		selectedDate: state.UserModule.selectedDate,
+	}
 }
 
 export default connect(map, {})(DayActivity)
