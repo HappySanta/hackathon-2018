@@ -48,7 +48,7 @@ class MainScreen extends Component {
 				</div>
 				<div className="MainScreen__advice">{this.getSecondAdvice(dayOfCycle, menstruationLength, cycleLength)}</div>
 			</div>
-			<DayActivity/>
+			<DayActivity isBadDay={isBadDay}/>
 		</div>
 	}
 }
