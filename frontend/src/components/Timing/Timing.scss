@@ -18,7 +18,7 @@
 		line-height: 34px;
 		width: 100%;
 		font-weight: 700;
-		padding-top: 112px;
+		padding-top: 90px;
 	}
 
 	&__bottom-single {
@@ -53,5 +53,10 @@
 		color: #452C28 !important;
 		text-align: center !important;
 		background: #FFFFFF !important;
+	}
+
+	.WaitDots {
+		padding-top: 2px;
+		vertical-align: text-bottom;
 	}
 }

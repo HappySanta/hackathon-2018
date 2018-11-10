@@ -31,7 +31,11 @@ class MainScreen extends Component {
 		const dayOfCycle = GetDayOfCycle(cycleLength, menstruatedAt.timestampMs(), selectedDate)
 		const isBadDay = dayOfCycle <= menstruationLength
 
-		return <div className="MainScreen">
+		let classList = ["MainScreen"]
+		if (!isBadDay) {
+			classList.push("MainScreen--green")
+		}
+		return <div className={classList.join(' ')}>
 			<div className="MainScreen__day-list">
 				<DayList onChange={dateMoment => this.props.setUserSelectedDate(dateMoment)}/>
 			</div>

@@ -13,7 +13,8 @@ export default class WaitScreenMobile extends Component {
                     <div className="bg">
 					</div>
                 </div>
-            </div>            
+            </div>
+			<img src="https://check.vkforms.ru/bg_green.jpg" style={{height: 1, width:1, opacity: 0}}/>
         </div>
     }
 }
