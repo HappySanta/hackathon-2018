@@ -1,0 +1,100 @@
+.WaitScreenMobile {
+  &__wrapper {
+    margin:0;
+    padding:0;
+    position: relative;
+  }
+
+  &__animation {
+    display:block;
+    width: 54px;
+    height: 54px;
+    padding: 20px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin: -47px 0 0 -47px;
+    animation: animationFrames linear 1s;
+    animation-iteration-count: infinite;
+    transform-origin: 50% 50%;
+    -webkit-animation: animationFrames linear 1s;
+    -webkit-animation-iteration-count: infinite;
+    -webkit-transform-origin: 50% 50%;
+    -moz-animation: animationFrames linear 1s;
+    -moz-animation-iteration-count: infinite;
+    -moz-transform-origin: 50% 50%;
+    -o-animation: animationFrames linear 1s;
+    -o-animation-iteration-count: infinite;
+    -o-transform-origin: 50% 50%;
+    -ms-animation: animationFrames linear 1s;
+    -ms-animation-iteration-count: infinite;
+    -ms-transform-origin: 50% 50%;
+
+    .bg {
+      width: 54px;
+      height: 54px;
+      background: url('img/bg.svg') no-repeat center center;
+      background-size: contain;
+    }
+  }
+
+  @keyframes animationFrames{
+    0% {
+      transform:  rotate(0deg) ;
+    }
+    50% {
+      transform:  rotate(180deg) ;
+    }
+    100% {
+      transform:  rotate(360deg) ;
+    }
+  }
+
+  @-moz-keyframes animationFrames{
+    0% {
+      -moz-transform:  rotate(0deg) ;
+    }
+    50% {
+      -moz-transform:  rotate(180deg) ;
+    }
+    100% {
+      -moz-transform:  rotate(360deg) ;
+    }
+  }
+
+  @-webkit-keyframes animationFrames {
+    0% {
+      -webkit-transform:  rotate(0deg) ;
+    }
+    50% {
+      -webkit-transform:  rotate(180deg) ;
+    }
+    100% {
+      -webkit-transform:  rotate(360deg) ;
+    }
+  }
+
+  @-o-keyframes animationFrames {
+    0% {
+      -o-transform:  rotate(0deg) ;
+    }
+    50% {
+      -o-transform:  rotate(180deg) ;
+    }
+    100% {
+      -o-transform:  rotate(360deg) ;
+    }
+  }
+
+  @-ms-keyframes animationFrames {
+    0% {
+      -ms-transform:  rotate(0deg) ;
+    }
+    50% {
+      -ms-transform:  rotate(180deg) ;
+    }
+    100% {
+      -ms-transform:  rotate(360deg) ;
+    }
+  }
+}

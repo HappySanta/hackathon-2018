@@ -19,14 +19,13 @@ import Icon28ChevronBack from '@vkontakte/icons/dist/28/chevron_back'
 import {Root, View, Panel, PanelHeader, HeaderButton, platform, IOS} from '@vkontakte/vkui'
 import '@vkontakte/vkui/dist/vkui.css'
 import './MobileContainer.css'
-import ScreenSpinner from "../../components/ScreenSpinner/ScreenSpinner"
 import CycleLength from "../../components/Timing/CycleLength"
 import MenstruationLength from "../../components/Timing/MenstruationLength"
 import MenstruatedAt from "../../components/Timing/MenstruatedAt"
 import Bdate from "../../components/Timing/Bdate"
 import FriendList from "../../components/FriendList/FriendList"
 import MainScreen from "../../components/MainScreen/MainScreen"
-import CalendarScreen from "../../components/CalendarScreen/CalendarScreen"
+import WaitScreenMobile from "../../components/WaitScreenMobile/WaitScreenMobile"
 
 const osName = platform()
 
@@ -113,7 +112,7 @@ class MobileContainer extends Component {
 			return <Error error={fatal} onClose={() => this.props.removeFatalError()}/>
 		}
 		if (!loaded) {
-			return <ScreenSpinner h={MobileContainer.deviceHeight}/>
+			return <WaitScreenMobile deviceHeight={MobileContainer.deviceHeight}/>
 		}
 		if ((this.getAndroidVersion() && this.getAndroidVersion() <= 4) || (this.getIosVersion() && this.getIosVersion() <= 8)) {
 			return <div className="not-supported" style={{

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="52px" height="52px" viewBox="0 0 52 52" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 52.3 (67297) - http://www.bohemiancoding.com/sketch -->
+    <title>Loader</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-dasharray="106,131" stroke-linecap="round" stroke-linejoin="round" stroke-opacity="0.8">
+        <g id="iPhone-8-Copy-36" transform="translate(-162.000000, -308.000000)" stroke="#FFFFFF" stroke-width="4">
+            <path d="M188,358 C201.254834,358 212,347.254834 212,334 C212,320.745166 201.254834,310 188,310 C174.745166,310 164,320.745166 164,334 C164,347.254834 174.745166,358 188,358 Z" id="Loader"></path>
+        </g>
+    </g>
+</svg>

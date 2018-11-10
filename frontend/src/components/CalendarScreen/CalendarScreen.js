@@ -1,6 +1,5 @@
 import React, {Component} from "react"
 import {connect} from "react-redux"
-import PropTypes from "prop-types"
 import "./CalendarScreen.css"
 import Calendar from "../Calendar/Calendar"
 import moment from "moment"
@@ -24,10 +23,6 @@ class CalendarScreen extends Component {
 			<Calendar month={moment().add(2, 'month')}/>
 		</div>
 	}
-}
-
-CalendarScreen.propTypes = {
-	
 }
 
 function map(state) {

@@ -1,6 +1,5 @@
 import React, {Component} from "react"
 import {connect} from "react-redux"
-import PropTypes from "prop-types"
 import "./Calendar.css"
 import {classNames, GetDayOfCycle} from "../../tools/helpers"
 import L from "../../lang/L"

@@ -1,6 +1,5 @@
 import React, {Component} from "react"
 import {connect} from "react-redux"
-import PropTypes from "prop-types"
 import "./FriendItem.css"
 
 class FriendItem extends Component {
