@@ -9,6 +9,7 @@ export default class User {
 	menstruatedAt
 	bdate
 	loading = false
+	selectedDate
 
 	getStringCycleLength() {
 		return this.cycleLength ? '' + this.cycleLength : ''
@@ -27,6 +28,7 @@ export default class User {
 			? SplitDate.fromRaw(raw.menstruated_at) : SplitDate.fromRaw(moment().unix())
 		user.bdate = raw.bdate
 			? SplitDate.fromRaw(raw.bdate) : SplitDate.fromRaw(moment().unix())
+		user.selectedDate = moment()
 		return user
 	}
 
@@ -48,6 +50,7 @@ export default class User {
 		user.menstruatedAt = this.menstruatedAt.clone()
 		user.bdate = this.bdate.clone()
 		user.loading = this.loading
+		user.selectedDate = this.selectedDate
 		return user
 	}
 }

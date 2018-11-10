@@ -1,23 +1,23 @@
 import React, {Component} from "react"
 import {connect} from "react-redux"
 import "./MainScreen.css"
-import {classNames, GetDayOfCycle} from "../../tools/helpers"
+import {GetDayOfCycle} from "../../tools/helpers"
 import L from "../../lang/L"
-import moment from "moment"
 import DayList from "../DayList/DayList"
 import DayActivity from "../DayActivity/DayActivity"
+import {setUserSelectedDate} from "../../modules/UserModule"
 
 class MainScreen extends Component {
 
 	render() {
-		const {cycleLength,menstruatedAt,menstruationLength} = this.props
+		const {cycleLength, menstruatedAt, menstruationLength, selectedDate} = this.props
 
-		const dayOfCycle = GetDayOfCycle(cycleLength, menstruatedAt.timestampMs())
+		const dayOfCycle = GetDayOfCycle(cycleLength, menstruatedAt.timestampMs(), selectedDate)
 		const isBadDay = dayOfCycle <= menstruationLength
 
 		return <div className="MainScreen">
 			<div className="MainScreen__day-list">
-				<DayList/>
+				<DayList onChange={dateMoment => this.props.setUserSelectedDate(dateMoment)}/>
 			</div>
 			<div className="MainScreen__title">{L.t(isBadDay ? "menstruation": "current_cycle")}</div>
 			<div className="MainScreen__day">{L.t('x_day', {x:dayOfCycle+1})}</div>
@@ -35,7 +35,8 @@ function map(state) {
 		cycleLength: state.UserModule.cycleLength || 28,
 		menstruatedAt: state.UserModule.menstruatedAt,
 		menstruationLength: state.UserModule.menstruationLength,
+		selectedDate: state.UserModule.selectedDate,
 	}
 }
 
-export default connect(map, {})(MainScreen)
+export default connect(map, {setUserSelectedDate})(MainScreen)
