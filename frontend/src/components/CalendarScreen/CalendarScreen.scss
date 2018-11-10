@@ -1,0 +1,14 @@
+.CalendarScreen {
+	&__week-day-list {
+		display: flex;
+		justify-content: space-between;
+		box-sizing: border-box;
+		padding: 0 16px;
+	}
+
+	&__week-day {
+		font-size: 13px;
+		line-height: 15px;
+		color: rgba(255,255,255,0.7)
+	}
+}

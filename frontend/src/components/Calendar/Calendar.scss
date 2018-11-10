@@ -1,5 +1,6 @@
 .Calendar {
-	padding: 5px;
+	background-color: #FFF;
+
 	&__table {
 		background-color: #FFF;
 		width: 100%;
@@ -7,13 +8,51 @@
 	}
 
 	&__day {
-		padding: 5px 3px;
+		padding: 10px 3px 6px;
+		font-size: 19px;
+		line-height: 19px;
 		&--not-same {
-			opacity: 0.5;
+			opacity: 0;
+		}
+		&--red {
+			background-color: #F1484D;
+			color:#FFF;
+		}
+		&--red-first {
+			border-radius: 20px 0 0 20px;
+		}
+		&--red-last {
+			border-radius: 0 20px 20px 0;
+		}
+		&:first-child {
+			padding-left: 16px;
+			border-radius: 0 !important;
+		}
+		&:last-child {
+			padding-right: 16px;
+			border-radius: 0 !important;
 		}
 	}
 
 	&__month-name {
 		padding-bottom: 10px;
+		text-align: center;
+		font-size: 18px;
+		line-height: 21px;
+		color: #222222;
+		font-weight: 500;
+		padding-top: 23px;
+	}
+
+	&__separator {
+		height: 1px;
+		background-color: rgba(0,0,0,0.12);
+		max-width: calc(100% - 36px);
+			margin: 16px auto 0;
+	}
+	&:last-child {
+		.Calendar__separator {
+			background-color: transparent;
+		}
 	}
 }

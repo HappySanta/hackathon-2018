@@ -11,7 +11,7 @@ export default class DailyState {
 	static fromRaw(raw) {
 		const dailyState = new DailyState()
 		dailyState.id = raw.id || 0
-		dailyState.date = raw.date || moment()
+		dailyState.date = raw.date ? moment(raw.date*1000) : moment()
 		dailyState.state = raw.state || []
 		dailyState.comment = raw.comment || null
 		return dailyState
@@ -19,7 +19,7 @@ export default class DailyState {
 
 	toRaw() {
 		return {
-			date: this.date,
+			date: this.date.unix(),
 			state: this.state,
 			comment: this.comment
 		}

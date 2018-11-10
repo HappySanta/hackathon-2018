@@ -26,6 +26,7 @@ import MenstruatedAt from "../../components/Timing/MenstruatedAt"
 import Bdate from "../../components/Timing/Bdate"
 import FriendList from "../../components/FriendList/FriendList"
 import MainScreen from "../../components/MainScreen/MainScreen"
+import CalendarScreen from "../../components/CalendarScreen/CalendarScreen"
 
 const osName = platform()
 

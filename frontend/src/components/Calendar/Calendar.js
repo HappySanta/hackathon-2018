@@ -2,31 +2,44 @@ import React, {Component} from "react"
 import {connect} from "react-redux"
 import PropTypes from "prop-types"
 import "./Calendar.css"
-import {classNames} from "../../tools/helpers"
+import {classNames, GetDayOfCycle} from "../../tools/helpers"
 import L from "../../lang/L"
 
 class Calendar extends Component {
-
-
-	constructor(props) {
-		super(props)
-
-		window.m = this.props.month
-
-		let {month} = this.props
-		console.log(
-			month.inspect(),
-			this.getFirstDayOfFirstWeek().inspect(),
-			this.getFirstDayOfFirstWeek().inspect(),
-			this.getDayOffset(0).inspect(),
-			this.getDayOffset(1).inspect(),
-		)
-	}
 
 	onClick = day => {
 		if (this.props.onClick) {
 			this.props.onClick(day)
 		}
+	}
+
+	isRedDay(day) {
+		const {
+			cycleLength,
+			menstruatedAt,
+			menstruationLength
+		} = this.props
+		const dayOfCycle = GetDayOfCycle(cycleLength, menstruatedAt.timestampMs(), day)
+		return dayOfCycle < menstruationLength
+	}
+
+	isFirstRed(day) {
+		const {
+			cycleLength,
+			menstruatedAt,
+		} = this.props
+		const dayOfCycle = GetDayOfCycle(cycleLength, menstruatedAt.timestampMs(), day)
+		return dayOfCycle === 0
+	}
+
+	isLastRed(day) {
+		const {
+			cycleLength,
+			menstruatedAt,
+			menstruationLength
+		} = this.props
+		const dayOfCycle = GetDayOfCycle(cycleLength, menstruatedAt.timestampMs(), day)
+		return dayOfCycle === menstruationLength-1
 	}
 
 	isSameMonth(day) {
@@ -59,7 +72,10 @@ class Calendar extends Component {
 		const day = this.getDayOffset(offset)
 		const name = classNames({
 			"Calendar__day":true,
-			"Calendar__day--not-same":!this.isSameMonth(day)
+			"Calendar__day--not-same":!this.isSameMonth(day),
+			"Calendar__day--red": this.isRedDay(day),
+			"Calendar__day--red-first": this.isFirstRed(day),
+			"Calendar__day--red-last": this.isLastRed(day),
 		})
 		return <td onClick={() => this.onClick(day)}
 				   className={name}
@@ -88,22 +104,22 @@ class Calendar extends Component {
 		const {month} = this.props
 		return <div className="Calendar">
 			<div className="Calendar__month-name">{L.t("month_"+(month.month()+1))}</div>
-			<table className="Calendar__table">
+			<table cellSpacing={0} cellPadding={0} className="Calendar__table">
 				<tbody>
 				{weeks}
 				</tbody>
 			</table>
+			<div className="Calendar__separator"/>
 		</div>
 	}
 }
 
-Calendar.propTypes = {
-	
-}
 
 function map(state) {
 	return {
-
+		cycleLength: state.UserModule.cycleLength || 28,
+		menstruatedAt: state.UserModule.menstruatedAt,
+		menstruationLength: state.UserModule.menstruationLength,
 	}
 }
 

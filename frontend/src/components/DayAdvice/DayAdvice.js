@@ -9,12 +9,12 @@ class DayAdvice extends Component {
 
 		return [
 			{
-				title: "Hello world",
-				text: "Bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla"
+				title: "Настроение",
+				text: "Настроение улучшается, наступает просветление в мыслях – это хорошее время для составления планов, принятия взвешенных решений."
 			},
 			{
-				title: "Hello world",
-				text: "Bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla"
+				title: "Приветствую!",
+				text: "Этот путеводитель объясняет, какие процессы происходят в организме женщины на протяжении менструального цикла. Описывает, как они влияют на физическое самочувствие и настроение. Подсказывает, как подстроить свои дела, досуг, спорт, секс, диету под индивидуальные особенности. Цель путеводителя – помочь каждой женщине и девушке лучше понять себя, а значит, сделать каждую из нас сильнее, увереннее в себе, счастливее."
 			}
 		]
 
