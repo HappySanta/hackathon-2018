@@ -45,6 +45,10 @@ export default function ru() {
 			ovulation_after_x_day_0:"Овуляция через {{count}} день",
 			ovulation_after_x_day_1:"Овуляция через {{count}} деня",
 			ovulation_after_x_day_2:"Овуляция через {{count}} дней",
+
+			main_tab_activity: "Состояние",
+			main_tab_friends: "Друзья",
+			main_tab_advice: "Советы",
         }
     }
 }

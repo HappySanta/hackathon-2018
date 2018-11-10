@@ -6,6 +6,7 @@ import {classNames, GetDayOfCycle} from "../../tools/helpers"
 import L from "../../lang/L"
 import moment from "moment"
 import DayList from "../DayList/DayList"
+import DayActivity from "../DayActivity/DayActivity"
 
 class MainScreen extends Component {
 
@@ -25,6 +26,7 @@ class MainScreen extends Component {
 				<div className="MainScreen__advice">{L.t("low_chance_to_peer")}</div>
 				<div className="MainScreen__advice">{L.t("ovulation_after_x_day", {count:6})}</div>
 			</div>
+			<DayActivity/>
 		</div>
 	}
 }
