@@ -54,6 +54,11 @@ export default function ru() {
 			main_tab_activity: "Состояние",
 			main_tab_friends: "Друзья",
 			main_tab_advice: "Советы",
+
+			category_mood: "Настроение",
+			category_sign: "Симптомы",
+			category_fill: "Выделения",
+			category_events: "Другие события",
         }
     }
 }

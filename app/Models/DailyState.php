@@ -41,27 +41,54 @@ class DailyState extends Model
             [
                 "name" => "mood",
                 "items" => [
-                    "asdasd",
-                    "asdasd", "asdasd", "asdasd", "asdasd", "asdasd", "asdasd", "asdasd", "asdasd", "asdasd", "asdasd", "asdasd",
+                    "Спокойная",
+                    "Радосная",
+                    "Энергичная",
+                    "Игривая",
+                    "Перепады настроения",
+                    "Радражена",
+                    "Грусная",
+                    "Встревоженная",
+                    "Чувство вины",
+                    "Навязчивые мысли",
+                    "Апатичная",
+                    "Растерянная",
+                    "Жесткая самокритика",
                 ]
             ],
             [
                 "name" => "sign",
                 "items" => [
-                    "asdasd",
-                    "asdasd", "asdasd", "asdasd", "asdasd", "asdasd", "asdasd", "asdasd", "asdasd", "asdasd", "asdasd", "asdasd",
+                    "Все в порядке",
+                    "Тянет живот",
+                    "Чувсвительная грудь",
+                    "Головная боль",
+                    "Прыщи",
+                    "Тошнота",
+                    "Усталость",
+                    "Вздутие живота",
+                    "Бессоница",
+                    "Запор",
+                    "Диарея",
                 ]],
             [
                 "name" => "fill",
                 "items" => [
-                    "asdasd",
-                    "asdasd", "asdasd", "asdasd", "asdasd", "asdasd", "asdasd", "asdasd", "asdasd", "asdasd", "asdasd", "asdasd",
+                    "Выделений нет",
+                    "Кровомажущие",
+                    "Липкие",
+                    "Кремообразные",
+                    "Слизистые",
+                    "Водянистые",
+                    "Нетипичные",
                 ]],
             [
                 "name" => "events",
                 "items" => [
-                    "asdasd",
-                    "asdasd", "asdasd", "asdasd", "asdasd", "asdasd", "asdasd", "asdasd", "asdasd", "asdasd", "asdasd", "asdasd",
+                    "Путешествие",
+                    "Стресс",
+                    "Болезнь или травма",
+                    "Алкоголь",
                 ]]
         ];
     }
