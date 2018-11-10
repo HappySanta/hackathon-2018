@@ -3,50 +3,20 @@ import {connect} from "react-redux"
 import L from "../../lang/L"
 import {classNames} from "../../tools/helpers"
 import "./DayState.css"
+import {isItemSelected, toggleStateItem} from "../../modules/DailyStateModule"
 
 class DayState extends Component {
 
-
-
 	getCategories() {
-		return [
-			{
-				name: "mood",
-				items: [
-					"asdasd",
-					"asdasd","asdasd","asdasd","asdasd","asdasd","asdasd","asdasd","asdasd","asdasd","asdasd","asdasd",
-				]
-			},
-			{
-				name: "sign",
-				items: [
-					"asdasd",
-					"asdasd","asdasd","asdasd","asdasd","asdasd","asdasd","asdasd","asdasd","asdasd","asdasd","asdasd",
-				]
-			},
-			{
-				name: "fill",
-				items: [
-					"asdasd",
-					"asdasd","asdasd","asdasd","asdasd","asdasd","asdasd","asdasd","asdasd","asdasd","asdasd","asdasd",
-				]
-			},
-			{
-				name: "events",
-				items: [
-					"asdasd",
-					"asdasd","asdasd","asdasd","asdasd","asdasd","asdasd","asdasd","asdasd","asdasd","asdasd","asdasd",
-				]
-			}
-		]
+		return this.props.stateSchema
 	}
 
-	isActiveItem() {
-		return false
+	isActiveItem(item, index, category) {
+		return isItemSelected(this.props.dailyStateData, category.name, index)
 	}
 
 	toggleItem(item, index, category) {
-
+		this.props.toggleStateItem(category.name, index)
 	}
 
 	renderItem(item, index, category) {
@@ -75,14 +45,11 @@ class DayState extends Component {
 	}
 }
 
-DayState.propTypes = {
-	
-}
-
 function map(state) {
 	return {
-
+		stateSchema: state.BootstrapModule.stateSchema,
+		dailyStateData: state.DailyStateModule.state
 	}
 }
 
-export default connect(map, {})(DayState)
+export default connect(map, {toggleStateItem})(DayState)

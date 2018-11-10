@@ -43,16 +43,41 @@ export function setDailyStateComment(comment) {
 	return setDailyState(dailyState => dailyState.comment = comment)
 }
 
-export function storeDailyState(onSuccess) {
+export function setDailyStateData(state) {
+	return setDailyState(dailyState => dailyState.state = state)
+}
+
+export function toggleStateItem(categoryName, itemIndex) {
+	return (dispatch, getState) => {
+		let dailyState = getState().DailyStateModule
+		let currentState = Object.assign({}, dailyState.state)
+		if (currentState[categoryName] === undefined) {
+			currentState[categoryName] = []
+		}
+		let indexOfItemIndex = currentState[categoryName].indexOf(itemIndex)
+		if (indexOfItemIndex === -1) {
+			currentState[categoryName].push(itemIndex)
+		} else {
+			currentState[categoryName].splice(indexOfItemIndex, 1)
+			if (!currentState[categoryName].length) {
+				delete currentState[categoryName]
+			}
+		}
+		dispatch(setDailyStateData(currentState))
+		dispatch(storeDailyState())
+	}
+}
+
+export function isItemSelected(currentState, categoryName, itemIndex) {
+	return currentState[categoryName] !== undefined && Array.isArray(currentState[categoryName]) && currentState[categoryName].indexOf(itemIndex) !== -1
+}
+
+export function storeDailyState() {
 	return (dispatch, getState) => {
 		let dailyState = getState().DailyStateModule
 		dispatch(setDailyStateLoading(true))
 		Backend.request('v1/state', dailyState.toRaw(), "POST").then(response => {
 			dispatch(setDailyStateLoading(false))
-			dispatch(initDailyState(DailyState.fromRaw(response)))
-			if (onSuccess) {
-				onSuccess(response)
-			}
 		}).catch(e => {
 			dispatch(setDailyStateLoading(false))
 			setFatalError(e)
