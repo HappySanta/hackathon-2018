@@ -33,8 +33,6 @@ export function bootstrap(onSuccess) {
 		Backend.request('v1/bootstrap', {}).then(r => {
 			if (r.user) {
 				dispatch(setUser(User.fromRaw(r.user)))
-			} else {
-				dispatch(replacePage(PANEL_CYCLE_LENGTH))
 			}
 			dispatch(setBootstrap({loaded: true}))
 			onSuccess(r)

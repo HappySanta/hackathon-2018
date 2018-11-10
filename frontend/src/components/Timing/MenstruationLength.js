@@ -25,10 +25,17 @@ class MenstruationLength extends Component {
 							 list={[...Array(11).keys()]} offset={1}/>
 			</div>
 			<FixedLayout vertical="bottom">
-				<div className="Timing__bottom-single" onClick={() => this.toMenstruatedAt()}>
-					<button className="Btn">
-						{L.t('next')}
-					</button>
+				<div className="Timing__bottom-double" onClick={() => this.toMenstruatedAt()}>
+					<div>
+						<button className="Btn Timing__button-next">
+							{L.t('next')}
+						</button>
+					</div>
+					<div>
+						<button className="Btn Btn--light">
+							{L.t('back')}
+						</button>
+					</div>
 				</div>
 			</FixedLayout>
 		</div>

@@ -3,7 +3,6 @@
 body {
 	margin: 0;
 	padding: 0;
-	background: #FFCBD3;
 	color: #000;
 	direction: ltr;
 	font-size: $primary-font-size;
@@ -20,8 +19,6 @@ input {
 }
 
 :root {
-	background: #FFCBD3;
-	--background_page: #FFCBD3;
 	--font-ios: TT Commons, BlinkMacSystemFont, Roboto, Open Sans, Helvetica Neue, sans-serif;
 	--font-android: TT Commons, BlinkMacSystemFont, Roboto, Open Sans, Helvetica Neue, sans-serif;
 	--font-common: TT Commons, BlinkMacSystemFont, Roboto, Open Sans, Helvetica Neue, sans-serif;

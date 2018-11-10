@@ -10,6 +10,7 @@ export default function ru() {
 			month: 'Месяц',
 			year: 'Год',
 			next: 'Дальше',
+			back: 'Назад',
 			month_1:"Январь",
 			month_2:"Февраль",
 			month_3:"Март",

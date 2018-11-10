@@ -85,7 +85,13 @@ export function subscribeToHistory(history) {
 export function handleLocation(pathname) {
 	return dispatch => {
 		let route = getRouteByPath(pathname)
-		const resolve = () => {
+		const resolve = (r) => {
+			if (r && !r.user) {
+				if (route.panelId !== PANEL_CYCLE_LENGTH) {
+					dispatch(replacePage(PANEL_CYCLE_LENGTH))
+					return
+				}
+			}
 			switch (route.panelId) {
 				default:
 			}
