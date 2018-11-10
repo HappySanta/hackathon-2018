@@ -1,6 +1,5 @@
 import React, {Component} from "react"
 import {connect} from "react-redux"
-import PropTypes from "prop-types"
 import "./DayList.css"
 import moment from "moment"
 import {classNames} from "../../tools/helpers"
@@ -15,8 +14,7 @@ class DayList extends Component {
 	}
 
 	isActiveDay(day) {
-		//TODO: брать активный день и из стейта
-		const now = moment()
+		const now = this.props.selectedDate
 		return day.isSame(now, 'day')
 	}
 
@@ -58,13 +56,9 @@ class DayList extends Component {
 	}
 }
 
-DayList.propTypes = {
-	
-}
-
 function map(state) {
 	return {
-
+		selectedDate: state.UserModule.selectedDate
 	}
 }
 

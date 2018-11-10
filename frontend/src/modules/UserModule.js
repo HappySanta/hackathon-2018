@@ -56,6 +56,10 @@ export function setUserLoading(loading) {
 	return setUser(user => user.loading = loading)
 }
 
+export function setUserSelectedDate(selectedDate) {
+	return setUser(user => user.selectedDate = selectedDate)
+}
+
 export function createUser(onSuccess) {
 	return (dispatch, getState) => {
 		let user = getState().UserModule
