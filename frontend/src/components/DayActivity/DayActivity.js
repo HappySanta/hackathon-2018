@@ -5,6 +5,8 @@ import L from "../../lang/L"
 import DayState from "../DayState/DayState"
 import moment from "moment"
 import "./DayActivity.css"
+import DayFriends from "../DayFriends/DayFriends"
+import DayAdvice from "../DayAdvice/DayAdvice"
 
 const PANEL_ACTIVITY = "activity"
 const PANEL_FRIENDS = "friends"
@@ -40,6 +42,10 @@ class DayActivity extends Component {
 	renderContent() {
 		if (this.getActivePanel() === PANEL_ACTIVITY) {
 			return <DayState/>
+		} else if (this.getActivePanel() === PANEL_FRIENDS) {
+			return <DayFriends/>
+		} else {
+			return <DayAdvice/>
 		}
 	}
 
