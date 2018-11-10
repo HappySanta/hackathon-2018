@@ -12,7 +12,7 @@ export default class DailyState {
 		const dailyState = new DailyState()
 		dailyState.id = raw.id || 0
 		dailyState.date = raw.date || moment()
-		dailyState.state = raw.state || null
+		dailyState.state = raw.state || []
 		dailyState.comment = raw.comment || null
 		return dailyState
 	}
