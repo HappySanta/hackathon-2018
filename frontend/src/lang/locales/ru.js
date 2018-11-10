@@ -42,9 +42,14 @@ export default function ru() {
 			week_day_short_6:"сб",
 
 			low_chance_to_peer: "Низкая вероятность забеременеть",
+			hight_chance_to_peer: "Высокая вероятность забеременеть",
 			ovulation_after_x_day_0:"Овуляция через {{count}} день",
-			ovulation_after_x_day_1:"Овуляция через {{count}} деня",
+			ovulation_after_x_day_1:"Овуляция через {{count}} дня",
 			ovulation_after_x_day_2:"Овуляция через {{count}} дней",
+
+			m_after_x_day_0:"Месячные через {{count}} день",
+			m_after_x_day_1:"Месячные через {{count}} дня",
+			m_after_x_day_2:"Месячные через {{count}} дней",
 
 			main_tab_activity: "Состояние",
 			main_tab_friends: "Друзья",

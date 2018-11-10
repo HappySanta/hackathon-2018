@@ -9,6 +9,22 @@ import {setUserSelectedDate} from "../../modules/UserModule"
 
 class MainScreen extends Component {
 
+	getSecondAdvice(dayOfCycle, menstruationLength, cycleLength) {
+		if (dayOfCycle < menstruationLength) {
+			return L.t("ovulation_after_x_day", {count:menstruationLength-dayOfCycle})
+		} else {
+			return L.t("m_after_x_day", {count:cycleLength-dayOfCycle})
+		}
+	}
+
+	getFirstAdvice(dayOfCycle, menstruationLength, cycleLength) {
+		if (dayOfCycle < menstruationLength) {
+			return L.t('low_chance_to_peer')
+		} else {
+			return L.t('hight_chance_to_peer')
+		}
+	}
+
 	render() {
 		const {cycleLength, menstruatedAt, menstruationLength, selectedDate} = this.props
 
@@ -22,8 +38,10 @@ class MainScreen extends Component {
 			<div className="MainScreen__title">{L.t(isBadDay ? "menstruation": "current_cycle")}</div>
 			<div className="MainScreen__day">{L.t('x_day', {x:dayOfCycle+1})}</div>
 			<div className="MainScreen__advice-list">
-				<div className="MainScreen__advice">{L.t("low_chance_to_peer")}</div>
-				<div className="MainScreen__advice">{L.t("ovulation_after_x_day", {count:6})}</div>
+				<div className="MainScreen__advice-wrapper">
+					<div className="MainScreen__advice">{this.getFirstAdvice(dayOfCycle, menstruationLength, cycleLength)}</div>
+				</div>
+				<div className="MainScreen__advice">{this.getSecondAdvice(dayOfCycle, menstruationLength, cycleLength)}</div>
 			</div>
 			<DayActivity/>
 		</div>
