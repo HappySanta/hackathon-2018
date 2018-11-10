@@ -30,7 +30,7 @@ class MenstruationLength extends Component {
 			</div>
 			<FixedLayout vertical="bottom">
 				<div className="Timing__bottom-double">
-					<div>
+					<div className="Timing__first-button">
 						<button className="Btn Timing__button-next" onClick={() => this.toMenstruatedAt()}>
 							{L.t('next')}
 						</button>

@@ -27,6 +27,16 @@
 		width: 100%;
 	}
 
+	&__bottom-double {
+		padding: 0 16px 24px 16px;
+		box-sizing: border-box;
+		width: 100%;
+	}
+
+	&__first-button {
+		margin-bottom: 8px;
+	}
+
 	&__center {
 		position: absolute;
 		top: 50%;

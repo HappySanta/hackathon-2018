@@ -4,7 +4,7 @@ import "./Timing.css"
 import L from "../../lang/L"
 import {createUser, setUserBdate} from "../../modules/UserModule"
 import {FixedLayout} from '@vkontakte/vkui'
-import {getPathByPanelId, PANEL_MAIN, pushPage} from "../../modules/PageModule"
+import {getPathByPanelId, PANEL_MAIN, popPage, pushPage} from "../../modules/PageModule"
 import DatePicker from "../DatePicker/DatePicker"
 import WaitDots from "../WaitDots/WaitDots"
 
@@ -14,6 +14,10 @@ class MenstruatedAt extends Component {
 		this.props.createUser(() => {
 			this.props.pushPage(getPathByPanelId(PANEL_MAIN))
 		})
+	}
+
+	back() {
+		this.props.popPage()
 	}
 
 	render() {
@@ -26,10 +30,17 @@ class MenstruatedAt extends Component {
 				<DatePicker date={bdate} onChange={value => this.props.setUserBdate(value)}/>
 			</div>
 			<FixedLayout vertical="bottom">
-				<div className="Timing__bottom-single" onClick={() => this.toMain()}>
-					<button className="Btn">
-						{!loading ? L.t('next') : <WaitDots/>}
-					</button>
+				<div className="Timing__bottom-double">
+					<div className="Timing__first-button">
+						<button className="Btn Timing__button-next" onClick={() => this.toMain()}>
+							{!loading ? L.t('next') : <WaitDots/>}
+						</button>
+					</div>
+					<div>
+						<button className="Btn Btn--light" onClick={() => this.back()}>
+							{L.t('back')}
+						</button>
+					</div>
 				</div>
 			</FixedLayout>
 		</div>
@@ -43,4 +54,4 @@ function map(state) {
 	}
 }
 
-export default connect(map, {setUserBdate, pushPage, createUser})(MenstruatedAt)
+export default connect(map, {setUserBdate, pushPage, createUser, popPage})(MenstruatedAt)

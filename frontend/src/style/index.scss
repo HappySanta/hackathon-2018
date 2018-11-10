@@ -120,15 +120,15 @@ select {
 	}
 
 	&--light {
-		background: #DFE6ED;
-		color: #55677D;
-		&:hover {
-			background: #D3DCE6;
+		background: rgba(255, 255, 255, 0.16);
+		color: #FFFFFF;
+		&:hover, &:active {
+			background: rgba(255, 255, 255, 0.16);
 		}
 
 		&.mobile {
-			color: #45678F;
-			background: rgba(0,57,115,0.10);
+			color: #FFFFFF;
+			background: rgba(255, 255, 255, 0.16);
 		}
 	}
 
