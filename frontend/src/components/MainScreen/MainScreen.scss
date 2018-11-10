@@ -1,4 +1,5 @@
 .MainScreen {
+	padding-bottom: calc(env(safe-area-inset-bottom) + 49px);
 
 	&__day-list {
 		padding-bottom: 45px;

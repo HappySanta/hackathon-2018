@@ -1,4 +1,5 @@
 .CalendarScreen {
+	padding-bottom: calc(env(safe-area-inset-bottom) + 49px);
 	&__week-day-list {
 		display: flex;
 		justify-content: space-between;
