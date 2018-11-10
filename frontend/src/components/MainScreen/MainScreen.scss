@@ -1,8 +1,7 @@
 .MainScreen {
 
-	&__days {
-		height: 50px;
-		margin-bottom: 20px;
+	&__day-list {
+		padding-bottom: 45px;
 	}
 
 	&__title {
@@ -10,6 +9,9 @@
 		text-transform: uppercase;
 		color: #FFF;
 		font-size: 15px;
+		line-height: 18px;
+		font-weight: 900;
+		margin-bottom: 10px;
 	}
 
 	&__day {
@@ -18,6 +20,27 @@
 		color: #FFF;
 		font-size: 52px;
 		line-height: 52px;
+		font-weight: 600;
+	}
+
+	&__advice-list {
+		text-align: center;
+		padding-top: 41px;
+	}
+
+	&__advice {
+		font-size: 15px;
+		line-height: 18px;
+		color: #FFF;
+		background-color: rgba(0,0,0,0.2);
+		border-radius: 14px;
+		padding: 6px 12px 4px;
+		margin-bottom: 8px;
+		display: inline-block;
+		font-weight: 500;
+		&:last-child {
+			margin-bottom: 0;
+		}
 	}
 
 }

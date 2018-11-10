@@ -1,0 +1,32 @@
+.DayActivity {
+	margin-top: 33px;
+	background-color: #FFF;
+	border-radius: 12px 12px 0 0;
+
+	&__tab-list {
+		padding: 0 4px;
+		border-bottom: 1px solid rgba(0,0,0,0.12);
+	}
+
+	&__tab {
+		display: inline-block;
+		font-size: 13px;
+		line-height: 15px;
+		text-transform: uppercase;
+		padding:  17px 12px 13px;
+		border-bottom: 2px solid transparent;
+		text-align: center;
+		color: #71757A;
+		margin-bottom: -1px;
+
+		&--active {
+			color: #71757A;
+			border-bottom-color: #71757A;
+		}
+	}
+
+	&__content {
+		height: 400px;
+	}
+
+}

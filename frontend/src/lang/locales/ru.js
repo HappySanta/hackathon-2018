@@ -31,7 +31,24 @@ export default function ru() {
 			friend_list: "Ваши друзья",
 			menstruation:"Месячные",
 			current_cycle: "Текущий цикл",
-			x_day: "{{x}} день"
+			x_day: "{{x}} день",
+
+			week_day_short_0:"вс",
+			week_day_short_1:"пн",
+			week_day_short_2:"вт",
+			week_day_short_3:"ср",
+			week_day_short_4:"чт",
+			week_day_short_5:"пт",
+			week_day_short_6:"сб",
+
+			low_chance_to_peer: "Низкая вероятность забеременеть",
+			ovulation_after_x_day_0:"Овуляция через {{count}} день",
+			ovulation_after_x_day_1:"Овуляция через {{count}} деня",
+			ovulation_after_x_day_2:"Овуляция через {{count}} дней",
+
+			main_tab_activity: "Состояние",
+			main_tab_friends: "Друзья",
+			main_tab_advice: "Советы",
         }
     }
 }

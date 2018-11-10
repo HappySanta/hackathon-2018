@@ -1,0 +1,39 @@
+.DayList {
+
+	display: flex;
+	overflow: auto;
+	justify-content: space-between;
+
+
+	&__day {
+		border:1px solid transparent;
+		box-sizing: border-box;
+		color: #FFF;
+		width: 39px;
+		min-width: 39px;
+		border-radius: 10px;
+		text-align: center;
+
+		&--active {
+			border-color: #FFF;
+		}
+	}
+
+	&__week {
+		font-size: 13px;
+		line-height: 15px;
+		text-align: center;
+		color: rgba(255,255,255,0.7);
+		padding-bottom: 9px;
+		padding-top: 6px;
+	}
+
+	&__number {
+		font-size: 19px;
+		line-height: 19px;
+		font-weight: 800;
+		color: #FFFFFF;
+		text-align: center;
+		padding-bottom: 6px;
+	}
+}
