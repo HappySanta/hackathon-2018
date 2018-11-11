@@ -23,17 +23,21 @@
 		}
 		&--red-first {
 			border-radius: 20px 0 0 20px;
+			&:first-child {
+				border-radius: 0 !important;
+			}
 		}
 		&--red-last {
 			border-radius: 0 20px 20px 0;
+			&:last-child {
+				border-radius: 0 !important;
+			}
 		}
 		&:first-child {
 			padding-left: 16px;
-			border-radius: 0 !important;
 		}
 		&:last-child {
 			padding-right: 16px;
-			border-radius: 0 !important;
 		}
 	}
 

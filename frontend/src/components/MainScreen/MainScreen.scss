@@ -1,7 +1,7 @@
 .MainScreen {
 	padding-top: calc(44px + env(safe-area-inset-top));
 	background-image: url('https://check.vkforms.ru/bg.jpg?1');
-	background-size: cover;
+	background-size: 100vw;
 
 	&--green {
 		background-image: url('https://check.vkforms.ru/bg_green.jpg');
@@ -22,6 +22,7 @@
 		line-height: 18px;
 		font-weight: 900;
 		margin-bottom: 10px;
+		font-family: -apple-system, BlinkMacSystemFont, Roboto, Open Sans, Helvetica Neue, sans-serif;
 	}
 
 	&__day {
@@ -39,12 +40,13 @@
 	}
 
 	&__advice {
+		font-family: -apple-system, BlinkMacSystemFont, Roboto, Open Sans, Helvetica Neue, sans-serif;
 		font-size: 15px;
 		line-height: 18px;
 		color: #FFF;
 		background-color: rgba(0,0,0,0.2);
 		border-radius: 14px;
-		padding: 6px 12px 4px;
+		padding: 6px 12px;
 		margin-bottom: 8px;
 		display: inline-block;
 		font-weight: 500;
