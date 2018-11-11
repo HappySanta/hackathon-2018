@@ -73,6 +73,8 @@ export default function ru() {
 
 			profile: "Профиль",
 			basic_info: "Основная информация",
+			no_access: "Вы пока не предоставили доступ друзьям",
+			add_friend: "Добавить друга",
         }
     }
 }
