@@ -40,6 +40,14 @@ export default function ru() {
 			x_day_1: "{{count}} дня",
 			x_day_2: "{{count}} дней",
 
+			x_day_of_red_0: "{{count}} день менструации",
+			x_day_of_red_1: "{{count}} день менструации",
+			x_day_of_red_2: "{{count}} день менструации",
+
+			x_day_of_cycle_0: "{{count}} день цикла",
+			x_day_of_cycle_1: "{{count}} день цикла",
+			x_day_of_cycle_2: "{{count}} день цикла",
+
 			week_day_short_0:"вс",
 			week_day_short_1:"пн",
 			week_day_short_2:"вт",
