@@ -1,4 +1,5 @@
 .MainScreen {
+	padding-bottom: calc(env(safe-area-inset-bottom) + 49px);
 	background-image: url('https://check.vkforms.ru/bg.jpg');
 	background-size: cover;
 	padding-top: calc(44px + env(safe-area-inset-top));
@@ -9,6 +10,9 @@
 
 	&__day-list {
 		padding-bottom: 45px;
+		padding-left: 10px;
+		padding-right: 10px;
+		box-sizing: border-box;
 	}
 
 	&__title {

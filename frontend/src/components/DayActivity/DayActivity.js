@@ -41,7 +41,7 @@ class DayActivity extends Component {
 
 	renderContent() {
 		if (this.getActivePanel() === PANEL_ACTIVITY) {
-			return <DayState/>
+			return <DayState isBadDay={this.props.isBadDay}/>
 		} else if (this.getActivePanel() === PANEL_FRIENDS) {
 			return <DayFriends/>
 		} else {

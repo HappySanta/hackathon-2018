@@ -30,6 +30,7 @@ class DayState extends Component {
 	}
 
 	renderCategory = (category, index) => {
+		if (!this.props.isBadDay && category.name === "fill") return null
 		return <div className="DayState__category" key={index}>
 			<div className="DayState__category-name">{L.t("category_"+category.name)}</div>
 			<div className="DayState__category-items">
