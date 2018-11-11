@@ -42,4 +42,11 @@
 		border-radius: 10px;
 		margin-bottom: 10px;
 	}
+
+	&__text {
+		margin-bottom: 9px;
+		&:empty {
+			margin-bottom: 0;
+		}
+	}
 }
