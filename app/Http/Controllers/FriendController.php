@@ -278,7 +278,7 @@ class FriendController extends Controller
             ];
         }, $friendIds ) );
 
-        $user = \VK\Executor::api('users.get', [
+        $user = Executor::api('users.get', [
             'user_ids' => $request->userId,
             'v' => "5.85",
             'fields' => 'photo_200,sex',
