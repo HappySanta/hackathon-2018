@@ -4,7 +4,7 @@ import L from "../../lang/L"
 import {setUserBdate, setUserCycleLength, setUserMenstruationLength, updateUser} from "../../modules/UserModule"
 import "./UserProfile.css"
 import moment from "moment"
-import {Button, FixedLayout, Avatar, Checkbox} from "@vkontakte/vkui"
+import {Button, FixedLayout, Avatar, Checkbox, platform, IOS} from "@vkontakte/vkui"
 import BottomPopup from "../BottomPopup/BottomPopup"
 import {toggleFriend, togglePopup} from "../../modules/FriendModule"
 
@@ -50,8 +50,11 @@ class UserProfile extends Component {
 
 	render() {
 		let {selectedFriends, popupOpened, friends, selectedIds} = this.props
+
+		const osname = platform()
+
 		return <div className="UserProfile">
-			<div className="UserProfile__header">
+			<div className={"UserProfile__header" + (osname !== IOS ? " android" : "")}>
 				{L.t('profile')}
 			</div>
 			<div className="UserProfile__panel">
