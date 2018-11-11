@@ -22,12 +22,12 @@ export default class User {
 	static fromRaw(raw) {
 		const user = new User()
 		user.id = raw.id || 0
-		user.cycleLength = raw.cycle_length || 30
+		user.cycleLength = raw.cycle_length || 28
 		user.menstruationLength = raw.menstruation_length || 5
 		user.menstruatedAt = raw.menstruated_at
 			? SplitDate.fromRaw(raw.menstruated_at) : SplitDate.fromRaw(moment().unix())
 		user.bdate = raw.bdate
-			? SplitDate.fromRaw(raw.bdate) : SplitDate.fromRaw(moment().unix())
+			? SplitDate.fromRaw(raw.bdate) : SplitDate.fromRaw(moment().subtract(14, 'years').unix())
 		user.selectedDate = moment()
 		return user
 	}
