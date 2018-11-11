@@ -168,5 +168,6 @@
 
 	&__bottom-popup {
 		box-sizing: border-box;
+		max-height: calc(100vh - env(safe-area-inset-top) - 95px);
 	}
 }
