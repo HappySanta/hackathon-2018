@@ -1,8 +1,9 @@
 import React, {Component} from "react"
 import {connect} from "react-redux"
 import L from "../../lang/L"
-import {setUserBdate, setUserCycleLength, setUserMenstruationLength} from "../../modules/UserModule"
+import {setUserBdate, setUserCycleLength, setUserMenstruationLength, updateUser} from "../../modules/UserModule"
 import "./UserProfile.css"
+import moment from "moment"
 
 class UserProfile extends Component {
 
@@ -16,6 +17,21 @@ class UserProfile extends Component {
 		</select>
 	}
 
+	setUserCycleLength(x) {
+		this.props.setUserCycleLength(x)
+		this.props.updateUser()
+	}
+
+	setUserMenstruationLength(x) {
+		this.props.setUserMenstruationLength(x)
+		this.props.updateUser()
+	}
+
+	setUserBdate(moment) {
+		this.props.setUserBdate(moment)
+		this.props.updateUser()
+	}
+
 	render() {
 		return <div className="UserProfile">
 			<div className="UserProfile__header">
@@ -26,7 +42,7 @@ class UserProfile extends Component {
 					{L.t('basic_info')}
 				</div>
 				<div className="UserProfile__line">
-					{this.select(31,10, this.props.cycleLength, x => this.props.setUserCycleLength(x))}
+					{this.select(31,10, this.props.cycleLength, x => this.setUserCycleLength(x))}
 					<div className={"left"}>
 						{L.t('cycle_length_short')}
 					</div>
@@ -35,7 +51,7 @@ class UserProfile extends Component {
 					</div>
 				</div>
 				<div className="UserProfile__line">
-					{this.select(10,1, this.props.menstruationLength, x => this.props.setUserMenstruationLength(x))}
+					{this.select(10,1, this.props.menstruationLength, x => this.setUserMenstruationLength(x))}
 					<div className={"left"}>
 						{L.t('menstruation_length_short')}
 					</div>
@@ -47,7 +63,7 @@ class UserProfile extends Component {
 					<input type="date"
 						   className={"UserProfile__select"}
 						   value={this.props.bdate.format("YYYY-MM-DD")}
-						   onChange={(e) => this.props.setUserBdate(e.target.value)} />
+						   onChange={(e) => this.setUserBdate(moment(e.target.value))} />
 					<div className={"left"}>
 						{L.t('bdate_short')}
 					</div>
@@ -60,10 +76,6 @@ class UserProfile extends Component {
 	}
 }
 
-UserProfile.propTypes = {
-	
-}
-
 function map(state) {
 	return {
 		cycleLength: state.UserModule.cycleLength || 28,
@@ -72,4 +84,4 @@ function map(state) {
 	}
 }
 
-export default connect(map, {setUserCycleLength, setUserBdate, setUserMenstruationLength})(UserProfile)
+export default connect(map, {setUserCycleLength, setUserBdate, setUserMenstruationLength, updateUser})(UserProfile)

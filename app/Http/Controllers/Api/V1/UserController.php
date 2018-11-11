@@ -19,7 +19,6 @@ class UserController extends Controller
         }
         $user = new User();
         $user = $this->fill($user, $request);
-        \Log::info($user);
         if (!$user->isValid()) {
             return new ErrorResponse(400, 'Invalid params');
         }
@@ -39,7 +38,20 @@ class UserController extends Controller
         $user->menstruated_at = $menstruated_at ? Carbon::createfromTimestamp($menstruated_at) : null;
         $bdate = (int) $request->input('bdate', 0);
         $user->bdate = $bdate ? Carbon::createfromTimestamp($bdate) : null;
-        \Log::info($user);
         return $user;
+    }
+
+    public function update(SignRequest $request)
+    {
+        $user = User::find($request->userId);
+        if (empty($user)) {
+            return new ErrorResponse(400, 'User not found');
+        }
+        $user = $this->fill($user, $request);
+        if (!$user->isValid()) {
+            return new ErrorResponse(400, 'Invalid params');
+        }
+        $user->save();
+        return new OkResponse($user->toUserView());
     }
 }
