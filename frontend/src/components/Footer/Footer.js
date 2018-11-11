@@ -3,7 +3,7 @@ import {connect} from "react-redux"
 import PropTypes from "prop-types"
 import "./Footer.css"
 import {classNames} from "../../tools/helpers"
-import {PANEL_CALENDAR, PANEL_MAIN, pushPage} from "../../modules/PageModule"
+import {PANEL_CALENDAR, PANEL_MAIN, PANEL_PROFILE, pushPage} from "../../modules/PageModule"
 
 class Footer extends Component {
 
@@ -15,6 +15,10 @@ class Footer extends Component {
 		this.props.pushPage(PANEL_CALENDAR)
 	}
 
+	onPushProfile = () => {
+		this.props.pushPage(PANEL_PROFILE)
+	}
+
 	render() {
 		const main = classNames({
 			"FooterEx__icon": true,
@@ -23,8 +27,13 @@ class Footer extends Component {
 		})
 		const calendar = classNames({
 			"FooterEx__icon": true,
-			"FooterEx__icon--calendar": !this.props.main,
-			"FooterEx__icon--calendar-off": this.props.main,
+			"FooterEx__icon--calendar": this.props.calendar,
+			"FooterEx__icon--calendar-off": !this.props.calendar,
+		})
+		const profile = classNames({
+			"FooterEx__icon": true,
+			"FooterEx__icon--profile": this.props.profile,
+			"FooterEx__icon--profile-off": !this.props.profile,
 		})
 		return <div className="FooterEx">
 			<div onClick={this.onPushMain} className={main}>
@@ -33,18 +42,17 @@ class Footer extends Component {
 			<div onClick={this.onPushCalendar} className={calendar}>
 
 			</div>
+			<div onClick={this.onPushProfile} className={profile}>
+
+			</div>
 		</div>
 	}
 }
 
-Footer.propTypes = {
-	
-}
+Footer.propTypes = {}
 
 function map(state) {
-	return {
-
-	}
+	return {}
 }
 
 export default connect(map, {pushPage})(Footer)

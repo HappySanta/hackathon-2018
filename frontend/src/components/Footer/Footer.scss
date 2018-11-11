@@ -47,5 +47,17 @@
 			background-position: center center;
 			background-repeat: no-repeat;
 		}
+
+		&--profile-off {
+			background-image: url("./profile-off.svg");
+			background-position: center center;
+			background-repeat: no-repeat;
+		}
+
+		&--profile {
+			background-image: url("./profile.svg");
+			background-position: center center;
+			background-repeat: no-repeat;
+		}
 	}
 }

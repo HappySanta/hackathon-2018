@@ -8,7 +8,7 @@ import {
 	PANEL_CYCLE_LENGTH, PANEL_FRIEND_LIST,
 	PANEL_MAIN,
 	PANEL_MENSTRUATED_AT,
-	PANEL_MENSTRUATION_LENGTH,
+	PANEL_MENSTRUATION_LENGTH, PANEL_PROFILE,
 	popPage,
 	VIEW_MAIN,
 } from "../../modules/PageModule"
@@ -29,6 +29,7 @@ import WaitScreenMobile from "../../components/WaitScreenMobile/WaitScreenMobile
 import Calendar from "../../components/Calendar/Calendar"
 import CalendarScreen from "../../components/CalendarScreen/CalendarScreen"
 import Footer from "../../components/Footer/Footer"
+import UserProfile from "../../components/UserProfile/UserProfile"
 
 const osName = platform()
 
@@ -141,6 +142,9 @@ class MobileContainer extends Component {
 					<Panel id={PANEL_CALENDAR}>
 						<CalendarScreen/>
 					</Panel>
+					<Panel id={PANEL_PROFILE}>
+						<UserProfile/>
+					</Panel>
 					<Panel id={PANEL_CYCLE_LENGTH} className="MobileContainer__panel">
 						<CycleLength/>
 					</Panel>
@@ -158,7 +162,7 @@ class MobileContainer extends Component {
 					</Panel>
 				</View>
 			</Root>
-			{route.panelId === PANEL_MAIN || route.panelId === PANEL_CALENDAR ? <Footer main={route.panelId === PANEL_MAIN}/> : null}
+			{route.panelId === PANEL_MAIN || route.panelId === PANEL_CALENDAR || route.panelId === PANEL_PROFILE ? <Footer profile={route.panelId === PANEL_PROFILE} calendar={route.panelId === PANEL_CALENDAR} main={route.panelId === PANEL_MAIN}/> : null}
 		</div>
 	}
 }

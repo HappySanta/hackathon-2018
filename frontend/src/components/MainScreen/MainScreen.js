@@ -56,8 +56,8 @@ class MainScreen extends Component {
 function map(state) {
 	return {
 		cycleLength: state.UserModule.cycleLength || 28,
-		menstruatedAt: state.UserModule.menstruatedAt,
 		menstruationLength: state.UserModule.menstruationLength,
+		menstruatedAt: state.UserModule.menstruatedAt,
 		selectedDate: state.UserModule.selectedDate,
 	}
 }

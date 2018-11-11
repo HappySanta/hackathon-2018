@@ -7,6 +7,7 @@ export const VIEW_MAIN = 'view_main'
 
 export const PANEL_MAIN = '/'
 export const PANEL_CALENDAR = '/calendar'
+export const PANEL_PROFILE = '/profile'
 export const PANEL_FRIEND_LIST = '/friend_list'
 export const PANEL_CYCLE_LENGTH = '/cycle_length'
 export const PANEL_MENSTRUATION_LENGTH = '/menstruation_length'

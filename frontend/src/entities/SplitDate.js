@@ -23,6 +23,10 @@ export default class SplitDate {
 		return this.date.unix()
 	}
 
+	format(value) {
+		return this.date.format(value)
+	}
+
 	clone() {
 		const splitDate = new SplitDate()
 		splitDate.date = this.date

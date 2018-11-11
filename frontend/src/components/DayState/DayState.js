@@ -27,7 +27,7 @@ class DayState extends Component {
 		return <div onClick={() => this.toggleItem(item, index, category)}
 					key={index}
 					className={className}>{item}</div>
-	}
+	} 
 
 	renderCategory = (category, index) => {
 		if (!this.props.isBadDay && category.name === "fill") return null

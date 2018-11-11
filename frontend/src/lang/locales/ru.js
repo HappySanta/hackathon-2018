@@ -3,9 +3,12 @@ export default function ru() {
         translation: {
             oops: 'Что-то пошло не так',
 			cycle_length: 'Укажите длину вашего цикла',
+			cycle_length_short: "Длина цикла",
 			menstruation_length: 'Укажите длину месячных',
+			menstruation_length_short: "Длина месячных",
 			menstruated_at: 'Укажите начало последнего менструального цикла',
 			bdate: 'Укажите вашу дату рождения',
+			bdate_short: "Дата рождения",
 			day: 'День',
 			month: 'Месяц',
 			year: 'Год',
@@ -32,6 +35,10 @@ export default function ru() {
 			menstruation:"Месячные",
 			current_cycle: "Текущий цикл",
 			x_day: "{{x}} день",
+
+			x_day_0: "{{count}} день",
+			x_day_1: "{{count}} дня",
+			x_day_2: "{{count}} деней",
 
 			week_day_short_0:"вс",
 			week_day_short_1:"пн",
@@ -63,6 +70,9 @@ export default function ru() {
 			my_days_0: "день",
 			my_days_1: "дня",
 			my_days_2: "дней",
+
+			profile: "Профиль",
+			basic_info: "Основная информация",
         }
     }
 }
