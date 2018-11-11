@@ -110,7 +110,8 @@
 
 	&__friends-list {
 		overflow: auto;
-		max-height: calc(100vh - 89px);
+		max-height: calc(100vh - env(safe-area-inset-top) - 44px);
+		min-height: 117px;
 
 		.Checkbox__icon {
 			margin: 0 16px 0 0;
@@ -147,5 +148,15 @@
 		bottom: 0;
 		top: 0;
 		background-color: rgba(0,0,0,0.8);
+		z-index: 2;
+	}
+
+	&__no-friends {
+		font-weight: 500;
+		font-size: 17px;
+		color: #71757A;
+		text-align: center;
+		line-height: 22px;
+		padding: 46px 16px 16px;
 	}
 }

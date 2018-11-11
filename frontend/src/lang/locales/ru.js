@@ -86,6 +86,7 @@ export default function ru() {
 			users_add: 'Добавление пользователей',
 			accessed_friends: 'Друзья, имеющие доступ',
 			change: 'Изменить',
+			no_friends: 'Список друзей пуст',
         }
     }
 }
