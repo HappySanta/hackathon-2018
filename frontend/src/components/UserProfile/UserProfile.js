@@ -4,6 +4,7 @@ import L from "../../lang/L"
 import {setUserBdate, setUserCycleLength, setUserMenstruationLength, updateUser} from "../../modules/UserModule"
 import "./UserProfile.css"
 import moment from "moment"
+import {Button} from "@vkontakte/vkui"
 
 class UserProfile extends Component {
 
@@ -70,6 +71,16 @@ class UserProfile extends Component {
 					<div className={"right"}>
 						{this.props.bdate.format("DD.MM.YYYY")}
 					</div>
+				</div>
+			</div>
+			<div className="UserProfile__panel UserProfile__panel--no-access">
+				<div className="UserProfile__description">
+					{L.t('no_access')}
+				</div>
+				<div className="UserProfile__center">
+					<Button>
+						{L.t('add_friend')}
+					</Button>
 				</div>
 			</div>
 		</div>

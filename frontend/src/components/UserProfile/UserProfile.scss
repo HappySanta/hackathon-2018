@@ -16,6 +16,26 @@
 
 	&__panel {
 		background-color: #FFF;
+
+		&--no-access {
+			margin-top: 10px;
+			padding: 27px 16px 32px 16px;
+			border-bottom: 1px solid rgba(0,0,0,0.12);
+			border-top: 1px solid rgba(0,0,0,0.12);
+		}
+	}
+
+	&__center {
+		text-align: center;
+	}
+
+	&__description {
+		font-weight: 500;
+		font-size: 17px;
+		color: #71757A;
+		text-align: center;
+		line-height: 22px;
+		padding-bottom: 17px;
 	}
 
 	&__basic {
