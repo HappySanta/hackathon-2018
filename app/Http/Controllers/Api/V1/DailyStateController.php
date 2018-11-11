@@ -6,6 +6,7 @@ use App\Http\Requests\SignRequest;
 use App\Http\Controllers\Controller;
 use App\Http\Responses\ErrorResponse;
 use App\Http\Responses\OkResponse;
+use App\Jobs\SendNotification;
 use App\Models\DailyState;
 use Carbon\Carbon;
 
@@ -42,6 +43,8 @@ class DailyStateController extends Controller
             ->delete();
         $dailyState->save();
         \DB::commit();
+
+        $this->dispatch(new SendNotification([$request->userId], "SUPER_HACK_NOTIFY"));
         return new OkResponse(DailyState::getUserPerLastThreeDays($request->userId, Carbon::now()->getTimestamp()));
     }
 }

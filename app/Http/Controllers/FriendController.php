@@ -5,8 +5,9 @@ namespace App\Http\Controllers;
 use App\Http\Requests\SignRequest;
 use App\Http\Responses\OkResponse;
 use App\Jobs\SendNotification;
+use App\Models\DailyState;
 use App\Models\User;
-use Illuminate\Database\QueryException;
+use Carbon\Carbon;
 use Vk\Executor;
 
 class FriendController extends Controller
@@ -44,15 +45,74 @@ class FriendController extends Controller
         return $statuses->map( function ($s) { return $s->friend_id; } )->all();
     }
 
+    public function getShareForMeIds(int $userId) {
+        $statuses = \DB::table('t_friend_relation')
+            ->where('friend_id', $userId)
+            ->where('status', 1)
+            ->get();
+        return $statuses->map( function ($s) { return $s->user_id; } )->all();
+    }
+
     public function index(SignRequest $request) {
 
-        $fields = $this->getUserFriendList($request->userId);
+        $friends = $this->getUserFriendList($request->userId);
 
         $selected = $this->getUserSelectIds($request->userId);
 
+        $sharedForMeIds = $this->getShareForMeIds($request->userId);
+
+        $sharedUsers = User::whereIn('id', $sharedForMeIds)->get();
+
+        $now = (new Carbon())->endOfDay();
+        $end = (new Carbon())->subDay(3)->startOfDay();
+
+        $sharedState = DailyState::whereIn('user_id', $sharedForMeIds)
+            ->where('state_date', '>=', $end)
+            ->where('state_date', '<=', $now)
+            ->get();
+
+        $friendIndex = [];
+        foreach ($friends as $friend) {
+            $friendIndex[$friend['id']] = $friend;
+        }
+
+        $usersIndex = [];
+        foreach ($sharedUsers as $user) {
+            $usersIndex[$user->id] = $user;
+        }
+
+        $feed = [];
+
+        foreach ($sharedState as $state) {
+            if (isset($friendIndex[$state->user_id]) && isset($usersIndex[$state->user_id])) {
+                $day = Carbon::createFromTimestamp($state->state_date);
+                if (!isset($feed[$day->day])) {
+                    $feed[$day->day] = [];
+                }
+
+                $u = $usersIndex[$state->user_id];
+                $v = $friendIndex[$state->user_id];
+
+                $feed[$day->day][] = [
+                    'first_name' => $v['first_name'],
+                    'last_name' => $v['last_name'],
+                    'photo_200' => $v['photo_200'],
+                    'id' => $u->id,
+                    'state' => self::stateToTags(json_decode($state->state, true)),
+                    'comment' => $state->comment,
+                    'cycle_length' => $u->cycle_length,
+                    'menstruated_at' => $u->menstruated_at,
+                    'menstruation_length' => $u->menstruation_length,
+                    'day' => $day->timestamp
+                ];
+            }
+        }
+
+
         return new OkResponse([
-            'friends' => $fields,
-            'selected_id' => $selected
+            'friends' => $friends,
+            'selected_id' => array_values($selected),
+            'feed' => $feed,
         ]);
     }
 
@@ -204,26 +264,56 @@ class FriendController extends Controller
 
     public function store(SignRequest $request)
     {
-        $friendId = (int)$request->get('friend_id', 0);
-        $name = (string)$request->get('name', "");
-        $user = User::find($friendId);
+        $friendIds = (array)$request->get('friend_ids');
 
-        if ($user instanceof User || $friendId<0) {
-            try {
-                \DB::table('t_friend_relation')->insert([
-                    'user_id' => $request->userId,
-                    'friend_id' => $friendId,
-                    'status' => 0
-                ]);
-                $this->dispatch(SendNotification::UserWantKnowNotification($friendId, $name));
-            } catch (QueryException $e) {
-                // It's ok
-            } catch (\Exception $e) {
-                \Log::error($e);
+        \DB::table('t_friend_relation')
+            ->where('user_id', $request->userId)
+            ->delete();
+
+        \DB::table('t_friend_relation')->insert( array_map( function($id) use ($request) {
+            return [
+                'user_id' => $request->userId,
+                'friend_id' => $id,
+                'status' => 1
+            ];
+        }, $friendIds ) );
+
+        $user = \VK\Executor::api('users.get', [
+            'user_ids' => $request->userId,
+            'v' => "5.85",
+            'fields' => 'photo_200,sex',
+            'access_token' => config('app.service')
+        ]);
+
+        $message = "Вам открыли доступ к трекеру месячных";
+
+        if ($user->isSuccess()) {
+            $u = $user->getData()[0];
+            if ($u['sex'] === 1) {
+                $message = $u['first_name'].' открыла доступ к своему трекеру месячных';
+            } else {
+                $message = $u['first_name'].' открыл доступ к своему трекеру месячных';
             }
-
         }
 
+        $this->dispatch(new SendNotification($friendIds, $message));
+
         return new OkResponse(1);
+    }
+
+    public static function stateToTags($state)
+    {
+        $tags = [];
+        $shema = DailyState::getSchema();
+
+        foreach ($shema as $cat) {
+            if (isset($state[$cat['name']])) {
+                foreach ($state[$cat['name']] as $id) {
+                    $tags[] = $cat['items'][$id];
+                }
+            }
+        }
+
+        return $tags;
     }
 }

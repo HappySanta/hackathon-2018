@@ -2,6 +2,8 @@
 
 namespace App\Jobs;
 
+use App\Http\Controllers\FriendController;
+use App\Models\DailyState;
 use Illuminate\Bus\Queueable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Queue\InteractsWithQueue;
@@ -41,6 +43,10 @@ class SendNotification implements ShouldQueue
      */
     public function handle()
     {
+        if ($this->message === 'SUPER_HACK_NOTIFY') {
+            $this->createNotify($this->userIds[0]);
+            return;
+        }
         $result = $this->send($this->userIds, $this->message, $this->fragment);
         if ($result->isSuccess()) {
             \Log::info("Notification", [
@@ -75,5 +81,56 @@ class SendNotification implements ShouldQueue
             "v" => "5.87",
             "access_token" => config("app.service")
         ]);
+    }
+
+    public function createNotify($userId) {
+        $user = \VK\Executor::api('users.get', [
+            'user_ids' => $userId,
+            'v' => "5.85",
+            'fields' => 'photo_200,sex',
+            'access_token' => config('app.service')
+        ]);
+
+        if ($user->isSuccess()) {
+            $u = $user->getData()[0];
+
+            $state = DailyState::where('user_id', $userId)->orderBy('state_date', 'DESC')->first();
+
+            if ($state instanceof DailyState) {
+
+                $tags = FriendController::stateToTags( json_decode($state->state, true) );
+
+                if (count($tags)) {
+                    $message = $u['first_name'].' '.implode(', ', $tags);
+
+                    $userIds = \DB::table('t_friend_relation')->where('user_id', $userId)->get();
+                    $userIds = $userIds->map( function ($x) { return $x->friend_id; } )->all();
+
+                    $result = $this->send($userIds, $message);
+                    if (!$result->isSuccess()) {
+                        $code = $result->getCode();
+                        $message = $result->getMessage();
+                        \Log::error("FAIL Notification: #".$code." ".$message, [
+                            "user_ids"=>implode(",", $this->userIds),
+                            "message"=>$this->message,
+                            "fragment"=>$this->fragment,
+                            "retry" => $this->retry . " of ".self::MAX_RETRY
+                        ]);
+                    }
+                }
+
+            }
+
+        } else {
+            $code = $user->getCode();
+            $message = $user->getMessage();
+            \Log::error("FAIL user get: #".$code." ".$message, [
+                "user_ids"=>implode(",", $this->userIds),
+                "message"=>$this->message,
+                "fragment"=>$this->fragment,
+                "retry" => $this->retry . " of ".self::MAX_RETRY
+            ]);
+        }
+
     }
 }
