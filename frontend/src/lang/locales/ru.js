@@ -87,6 +87,9 @@ export default function ru() {
 			accessed_friends: 'Друзья, имеющие доступ',
 			change: 'Изменить',
 			no_friends: 'Список друзей пуст',
+			comment: 'Заметка',
+			comment_placeholder: 'Напишите заметку…',
+			save: 'Сохранить',
         }
     }
 }

@@ -50,6 +50,7 @@ class DailyState extends Model
             'id' => $this->id,
             'date' => $this->state_date,
             'state' => json_decode($this->state, true),
+            'comment' => $this->comment,
         ];
     }
 

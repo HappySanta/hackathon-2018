@@ -3,7 +3,9 @@ import {connect} from "react-redux"
 import L from "../../lang/L"
 import {classNames} from "../../tools/helpers"
 import "./DayState.css"
-import {isItemSelected, toggleStateItem} from "../../modules/DailyStateModule"
+import {isItemSelected, setDailyStateComment, storeDailyState, toggleStateItem} from "../../modules/DailyStateModule"
+import {FormLayout, Textarea, Button} from "@vkontakte/vkui"
+import WaitDots from "../WaitDots/WaitDots"
 
 class DayState extends Component {
 
@@ -41,6 +43,17 @@ class DayState extends Component {
 
 	render() {
 		return <div className="DayState">
+			<div className="DayState__comment">
+				<FormLayout>
+					<Textarea top={L.t('comment')}
+							  onChange={(e) => this.props.setDailyStateComment(e.target.value)}
+							  defaultValue={this.props.comment || ""}
+							  placeholder={L.t('comment_placeholder')} />
+					<Button size="xl" onClick={() => this.props.storeDailyState()}>
+						{this.props.loading ? <WaitDots/> : L.t('save')}
+					</Button>
+				</FormLayout>
+			</div>
 			{this.getCategories().map( this.renderCategory )}
 		</div>
 	}
@@ -49,8 +62,10 @@ class DayState extends Component {
 function map(state) {
 	return {
 		stateSchema: state.BootstrapModule.stateSchema,
-		dailyStateData: state.DailyStateModule.state
+		dailyStateData: state.DailyStateModule.state,
+		loading: state.DailyStateModule.loading,
+		comment: state.DailyStateModule.comment,
 	}
 }
 
-export default connect(map, {toggleStateItem})(DayState)
+export default connect(map, {toggleStateItem, setDailyStateComment, storeDailyState})(DayState)

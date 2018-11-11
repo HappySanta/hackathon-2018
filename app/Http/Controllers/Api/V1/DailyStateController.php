@@ -26,9 +26,6 @@ class DailyStateController extends Controller
         $stateDate = (int) $request->input('date', 0);
         $state = $request->input('state');
         $comment = (string) $request->input('comment', null);
-        if (empty($stateDate) || empty($state)) {
-            return new ErrorResponse(400, 'Invalid params');
-        }
         $dailyState = new DailyState();
         $dailyState->user_id = $request->userId;
         $date = Carbon::createFromTimestamp($stateDate);
