@@ -134,7 +134,7 @@ class UserProfile extends Component {
 									 title={L.t('users_add')}
 									 onClose={() => this.onBottomPopupClose()}>
 							<div className="UserProfile__friends-list">
-								{friends.map((friend) => {
+								{friends && friends.length ? friends.map((friend) => {
 									return <Checkbox style={{paddingTop: 10}}
 													 key={friend.id}
 													 checked={selectedIds.indexOf(friend.id) !== -1}
@@ -146,7 +146,9 @@ class UserProfile extends Component {
 											</div>
 										</div>
 									</Checkbox>
-								})}
+								}) : <div className="UserProfile__no-friends">
+									{L.t('no_friends')}
+								</div>}
 							</div>
 						</BottomPopup>
 					</div>
@@ -161,7 +163,7 @@ function map(state) {
 		cycleLength: state.UserModule.cycleLength || 28,
 		menstruationLength: state.UserModule.menstruationLength,
 		bdate: state.UserModule.bdate,
-		friends: state.FriendModule.friends,
+		friends: [],//state.FriendModule.friends,
 		selectedFriends: state.FriendModule.selected_friends,
 		selectedIds: state.FriendModule.selected_ids,
 		popupOpened: state.FriendModule.popupOpened,
