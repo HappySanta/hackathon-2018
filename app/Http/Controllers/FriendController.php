@@ -11,7 +11,52 @@ use Vk\Executor;
 
 class FriendController extends Controller
 {
-    public function index(SignRequest $request)
+    public function getUserFriendList(int $userId) {
+        $list = [];
+
+        $result = Executor::api("friends.get", [
+            'user_id' => $userId,
+            'v' => "5.85",
+            'fields' => 'photo_200',
+            'access_token' => config('app.service')
+        ]);
+
+        if ($result->isSuccess()) {
+            $list = $result->getData()['items'];
+        } else {
+            \Log::error("VK ERROR", [
+                'method' => $result->getRequest()->getMethod(),
+                'code' => $result->getCode(),
+                'message' => $result->getMessage()
+            ]);
+        }
+
+        return $list;
+    }
+
+    public function getUserSelectIds(int $userId) {
+
+        $statuses = \DB::table('t_friend_relation')
+            ->where('user_id', $userId)
+            ->where('status', 1)
+            ->get();
+
+        return $statuses->map( function ($s) { return $s->friend_id; } )->all();
+    }
+
+    public function index(SignRequest $request) {
+
+        $fields = $this->getUserFriendList($request->userId);
+
+        $selected = $this->getUserSelectIds($request->userId);
+
+        return new OkResponse([
+            'friends' => $fields,
+            'selected_id' => $selected
+        ]);
+    }
+
+    public function index_OLD(SignRequest $request)
     {
 
         $friendList = [];

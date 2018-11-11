@@ -4,9 +4,12 @@ import {STATUS_WAIT} from "../components/FriendList/FriendList"
 
 const UPDATE = 'Friend.UPDATE'
 const MAKE_REQUEST_WAIT = 'Friend.MAKE_REQUEST_WAIT'
+const TOGGLE_FRIEND = 'Friend.TOGGLE_FRIEND'
 
 const initState = {
-	list:[],
+	friends:[],
+	selected_ids: [],
+	selected_friends: [],
 	loading:false
 }
 
@@ -21,6 +24,19 @@ const FriendModule = (state = initState, action) => {
 				}
 				return user
 				} )}
+		case TOGGLE_FRIEND:
+			if (state.selected_ids.indexOf(action.id) !== -1) {
+				return {
+					...state,
+					selected_ids:state.selected_ids.filter( x => x!==action.id ),
+					selected_friends: state.selected_friends.filter( u => u.id !== action.id )
+				}
+			} else {
+				return {...state,
+					selected_ids:state.selected_ids.concat([action.id]),
+					selected_friends: state.selected_friends.concat( state.friends.filter(u => u.id === action.id) )
+				}
+			}
 		default:
 			return state
 	}
@@ -35,7 +51,11 @@ export function LoadFriends() {
 		dispatch(update({loading:true}))
 		Backend.request('v1/friends', {}, 'GET')
 			.then( response => {
-				dispatch(update({loading:false, list:response}))
+				dispatch(update({loading:false,
+					friends:response.friends,
+					selected_ids: response.selected_id,
+					selected_friends: response.friends.filter( user => response.selected_id.indexOf(user.id) !== -1 ),
+				}))
 			} )
 			.catch( e => {
 				devErrorLog(e)
@@ -44,21 +64,10 @@ export function LoadFriends() {
 	}
 }
 
-export function RequestSubscribe(id) {
-	return (dispatch) => {
-		dispatch({type:MAKE_REQUEST_WAIT, id})
-		Backend.request('v1/friends', {friend_id:id}, "POST")
-			.then(response => {
-				console.log(response)
-			})
-			.catch(e => {
-				devErrorLog(e)
-			})
+export function toggleFriend(id) {
+	return dispatch => {
+		dispatch({type: TOGGLE_FRIEND, id})
 	}
-}
-
-export function ShowFriendData() {
-
 }
 
 export default FriendModule
