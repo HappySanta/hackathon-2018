@@ -10,7 +10,8 @@ const initState = {
 	friends:[],
 	selected_ids: [],
 	selected_friends: [],
-	loading:false
+	loading:false,
+	popupOpened: false,
 }
 
 const FriendModule = (state = initState, action) => {
@@ -44,6 +45,13 @@ const FriendModule = (state = initState, action) => {
 
 function update(update) {
 	return {type: UPDATE, update}
+}
+
+export function togglePopup() {
+	return (dispatch, getState) => {
+		let {popupOpened} = getState().FriendModule
+		dispatch(update({popupOpened: !popupOpened}))
+	}
 }
 
 export function LoadFriends() {

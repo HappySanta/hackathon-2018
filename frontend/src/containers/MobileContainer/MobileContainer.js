@@ -142,7 +142,7 @@ class MobileContainer extends Component {
 						<CalendarScreen/>
 					</Panel>
 					<Panel id={PANEL_PROFILE}>
-						<UserProfile/>
+						<UserProfile h={MobileContainer.deviceHeight}/>
 					</Panel>
 					<Panel id={PANEL_CYCLE_LENGTH} className="MobileContainer__panel">
 						<CycleLength/>
@@ -161,7 +161,7 @@ class MobileContainer extends Component {
 					</Panel>
 				</View>
 			</Root>
-			{route.panelId === PANEL_MAIN || route.panelId === PANEL_CALENDAR || route.panelId === PANEL_PROFILE ? <Footer profile={route.panelId === PANEL_PROFILE} calendar={route.panelId === PANEL_CALENDAR} main={route.panelId === PANEL_MAIN}/> : null}
+			{route.panelId === PANEL_MAIN || route.panelId === PANEL_CALENDAR || (route.panelId === PANEL_PROFILE && !this.props.popupOpened) ? <Footer profile={route.panelId === PANEL_PROFILE} calendar={route.panelId === PANEL_CALENDAR} main={route.panelId === PANEL_MAIN}/> : null}
 		</div>
 	}
 }
@@ -170,6 +170,7 @@ function mapStateToProps(state) {
 	return {
 		fatal: state.FatalErrorModule,
 		loaded: state.BootstrapModule.loaded,
+		popupOpened: state.FriendModule.popupOpened,
 	}
 }
 

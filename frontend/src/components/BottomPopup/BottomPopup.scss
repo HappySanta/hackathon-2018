@@ -1,0 +1,38 @@
+.BottomPopup {
+	margin: 0 auto;
+	position: relative;
+	z-index: 2000;
+	background-color: #FFF;
+	border-radius: 12px 12px 0 0;
+
+	&__header {
+		background: #EBEFF4;
+		padding: 18px 16px;
+		border-radius: 12px 12px 0 0;
+		font-size: 17px;
+		color: #222222;
+		font-weight: 500;
+	}
+
+	&__buttons {
+		display: block;
+	}
+
+	&__footer {
+		padding: 20px 16px 20px 16px;
+
+		& > .Button {
+			width: 100%;
+			box-sizing: border-box;
+		}
+	}
+
+	&__close {
+		position: absolute;
+		top: 12px;
+		right: 16px;
+		background: url("./img/close.png") no-repeat center center/cover;
+		width: 24px;
+		height: 24px;
+	}
+}
