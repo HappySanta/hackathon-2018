@@ -10,6 +10,7 @@ use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Vk\ApiResponse;
+use Vk\Executor;
 
 class SendNotification implements ShouldQueue
 {
@@ -65,7 +66,7 @@ class SendNotification implements ShouldQueue
                 "retry" => $this->retry . " of " . self::MAX_RETRY
             ]);
 
-            if (\VK\Executor::isSoftErrorCode($code)) {
+            if (Executor::isSoftErrorCode($code)) {
                 if ($this->retry < self::MAX_RETRY) {
                     sleep(1);
                     self::dispatch(new self($this->userIds, $this->message, $this->fragment, $this->retry + 1));
@@ -76,7 +77,7 @@ class SendNotification implements ShouldQueue
 
     public function send(array $userIds, string $message, string $fragment = "from_notify"): ApiResponse
     {
-        return \Vk\Executor::api("notifications.sendMessage", [
+        return Executor::api("notifications.sendMessage", [
             "user_ids" => implode(",", $userIds),
             "message" => $message,
             "fragment" => $fragment,
@@ -87,7 +88,7 @@ class SendNotification implements ShouldQueue
 
     public function createNotify($userId)
     {
-        $user = \VK\Executor::api('users.get', [
+        $user = Executor::api('users.get', [
             'user_ids' => $userId,
             'v' => "5.85",
             'fields' => 'photo_200,sex',
