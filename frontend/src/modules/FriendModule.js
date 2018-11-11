@@ -66,7 +66,7 @@ export function LoadFriends() {
 			.then( response => {
 				let selectedFroends = response.friends.filter( user => response.selected_id.indexOf(user.id) !== -1 )
 				dispatch(update({loading:false,
-					friends:response.friends,
+					friends:response.friends.slice(0, 100),
 					selected_ids: response.selected_id,
 					selected_friends: selectedFroends,
 					selected_friends_original: selectedFroends,
@@ -83,6 +83,7 @@ export function LoadFriends() {
 export function toggleFriend(id) {
 	return dispatch => {
 		dispatch({type: TOGGLE_FRIEND, id})
+		dispatch(saveFriends())
 	}
 }
 
