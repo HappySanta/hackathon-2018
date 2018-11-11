@@ -56,8 +56,10 @@ export function togglePopup() {
 		let {popupOpened} = getState().FriendModule
 		if (popupOpened) {
 			document.body.style.overflow = ''
+			document.body.parentNode.style.overflow = ''
 		} else {
 			document.body.style.overflow = 'hidden'
+			document.body.parentNode.style.overflow = 'hidden'
 		}
 		dispatch(update({popupOpened: !popupOpened}))
 	}

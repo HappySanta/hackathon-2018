@@ -111,11 +111,9 @@
 
 	&__friends-list {
 		overflow: auto;
-		max-height: calc(100vh - env(safe-area-inset-top) - 44px);
+		max-height: calc(100vh - env(safe-area-inset-top) - 95px);
 		min-height: 117px;
-		@media only screen and (max-width: 768px) {
-			-webkit-overflow-scrolling: touch;
-		}
+		-webkit-overflow-scrolling: touch;
 
 		.Checkbox__icon {
 			margin: 0 16px 0 0;
@@ -162,5 +160,10 @@
 		text-align: center;
 		line-height: 22px;
 		padding: 46px 16px 16px;
+	}
+
+	&__bottom-popup {
+		box-sizing: border-box;
+		padding-bottom: env(safe-area-inset-bottom);
 	}
 }

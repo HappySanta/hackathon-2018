@@ -112,7 +112,7 @@ class UserProfile extends Component {
 					</div>
 					<div className="UserProfile__selected-friends">
 						{selectedFriends.map((friend) => {
-							return <div className="UserProfile__friend UserProfile__friend--added">
+							return <div className="UserProfile__friend UserProfile__friend--added" key={friend.id}>
 								<Avatar src={friend.photo_200} size={40} style={{marginRight: 12}}/>
 								<div>
 									{friend.first_name}
