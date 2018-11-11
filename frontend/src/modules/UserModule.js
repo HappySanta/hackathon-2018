@@ -50,7 +50,7 @@ export function setUserMenstruatedAt(menstruatedAt) {
 }
 
 export function setUserBdate(bdate) {
-	return setUser(user => user.bdate = bdate)
+	return setUser(user => user.bdate = SplitDate.fromRaw(bdate.unix()))
 }
 
 export function setUserLoading(loading) {
@@ -72,6 +72,20 @@ export function createUser(onSuccess) {
 			if (onSuccess) {
 				onSuccess(response)
 			}
+		}).catch(e => {
+			dispatch(setUserLoading(false))
+			dispatch(setFatalError(e))
+		})
+	}
+}
+
+export function updateUser() {
+	return (dispatch, getState) => {
+		let user = getState().UserModule
+		dispatch(setUserLoading(true))
+		Backend.request('v1/user/' + user.id, user.toRaw(), "PATCH").then(response => {
+			dispatch(setUserLoading(false))
+			dispatch(initUser(User.fromRaw(response)))
 		}).catch(e => {
 			dispatch(setUserLoading(false))
 			dispatch(setFatalError(e))

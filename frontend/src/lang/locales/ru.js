@@ -38,7 +38,7 @@ export default function ru() {
 
 			x_day_0: "{{count}} день",
 			x_day_1: "{{count}} дня",
-			x_day_2: "{{count}} деней",
+			x_day_2: "{{count}} дней",
 
 			week_day_short_0:"вс",
 			week_day_short_1:"пн",
