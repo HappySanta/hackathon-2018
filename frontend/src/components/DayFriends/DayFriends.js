@@ -3,7 +3,6 @@ import {connect} from "react-redux"
 import "./DayFriends.css"
 import FriendItem from "../FriendItem/FriendItem"
 import moment from "moment"
-import SplitDate from "../../entities/SplitDate"
 
 class DayFriends extends Component {
 
