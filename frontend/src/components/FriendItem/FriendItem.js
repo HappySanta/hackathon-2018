@@ -19,7 +19,7 @@ class FriendItem extends Component {
 				<div style={{backgroundImage:`url(${this.props.photo_200})`}} className="FriendItem__photo"/>
 				<div className="FriendItem__name-box">
 					<div className="FriendItem__name">{this.props.first_name} {this.props.last_name}</div>
-					<div className="FriendItem__description">{L.t(isBadDay ? 'x_day_of_red' : "x_day_of_cycle", {count:dayOfCycle})}</div>
+					<div className="FriendItem__description">{L.t(isBadDay ? 'x_day_of_red' : "x_day_of_cycle", {count:dayOfCycle+1})}</div>
 				</div>
 			</div>
 			<div className="FriendItem__content">
