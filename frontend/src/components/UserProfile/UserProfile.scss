@@ -112,6 +112,9 @@
 		overflow: auto;
 		max-height: calc(100vh - env(safe-area-inset-top) - 44px);
 		min-height: 117px;
+		@media only screen and (max-width: 768px) {
+			-webkit-overflow-scrolling: touch;
+		}
 
 		.Checkbox__icon {
 			margin: 0 16px 0 0;
