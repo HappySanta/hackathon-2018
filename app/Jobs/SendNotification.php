@@ -118,6 +118,9 @@ class SendNotification implements ShouldQueue
                     } else {
                         $message = $u['first_name'] . ' обновил свое состояние: ' . mb_strtolower(implode(', ', $tags));
                     }
+                    if ($state->comment) {
+                        $message = $u['first_name'] . ': '.$state->comment;
+                    }
 
                     if (count($userIds)) {
                         $result = $this->send($userIds, $message);
