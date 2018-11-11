@@ -163,7 +163,7 @@ function map(state) {
 		cycleLength: state.UserModule.cycleLength || 28,
 		menstruationLength: state.UserModule.menstruationLength,
 		bdate: state.UserModule.bdate,
-		friends: [],//state.FriendModule.friends,
+		friends: state.FriendModule.friends,
 		selectedFriends: state.FriendModule.selected_friends,
 		selectedIds: state.FriendModule.selected_ids,
 		popupOpened: state.FriendModule.popupOpened,
