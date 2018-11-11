@@ -91,8 +91,10 @@ export function changeDay(moment) {
 	return (dispatch, getState) => {
 		let {stateData} = getState().BootstrapModule
 		if (stateData[moment.date()]) {
+			console.log(1)
 			dispatch(initDailyState(DailyState.fromRaw(stateData[moment.date()])))
 		} else {
+			console.log(2)
 			dispatch(initDailyState(DailyState.fromRaw({date: moment.unix()})))
 		}
 	}

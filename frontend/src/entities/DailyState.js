@@ -31,6 +31,7 @@ export default class DailyState {
 		dailyState.date = this.date
 		dailyState.state = this.state
 		dailyState.loading = this.loading
+		dailyState.comment = this.comment
 		return dailyState
 	}
 }

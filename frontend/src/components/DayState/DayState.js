@@ -43,18 +43,19 @@ class DayState extends Component {
 
 	render() {
 		return <div className="DayState">
+			{this.getCategories().map( this.renderCategory )}
 			<div className="DayState__comment">
 				<FormLayout>
 					<Textarea top={L.t('comment')}
 							  onChange={(e) => this.props.setDailyStateComment(e.target.value)}
 							  defaultValue={this.props.comment || ""}
+							  value={this.props.comment || ""}
 							  placeholder={L.t('comment_placeholder')} />
 					<Button size="xl" onClick={() => this.props.storeDailyState()}>
 						{this.props.loading ? <WaitDots/> : L.t('save')}
 					</Button>
 				</FormLayout>
 			</div>
-			{this.getCategories().map( this.renderCategory )}
 		</div>
 	}
 }
