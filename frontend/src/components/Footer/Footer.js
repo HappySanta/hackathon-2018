@@ -1,6 +1,5 @@
 import React, {Component} from "react"
 import {connect} from "react-redux"
-import PropTypes from "prop-types"
 import "./Footer.css"
 import {classNames} from "../../tools/helpers"
 import {PANEL_CALENDAR, PANEL_MAIN, PANEL_PROFILE, pushPage} from "../../modules/PageModule"

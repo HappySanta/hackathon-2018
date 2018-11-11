@@ -26,6 +26,24 @@ class DailyState extends Model
         }
     }
 
+    public static function getUserPerLastThreeDays($userId, $timestamp)
+    {
+        $date = Carbon::createFromTimestamp($timestamp);
+        $states = DailyState::where('user_id', $userId)
+            ->whereBetween('state_date', [($date->copy())->subDays(3)->startOfDay(), $date->copy()->endOfDay()])
+            ->take(4)
+            ->get();
+        $response = [];
+        foreach ($states as $state) {
+            if ($state instanceof DailyState) {
+                $response[Carbon::createFromTimestamp($state->state_date)->day] = $state->toUserView();
+            } else {
+                $response[Carbon::createFromTimestamp($state->state_date)->day] = null;
+            }
+        }
+        return $response;
+    }
+
     public function toUserView()
     {
         return [

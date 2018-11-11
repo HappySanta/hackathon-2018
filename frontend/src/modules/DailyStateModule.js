@@ -1,6 +1,7 @@
 import DailyState from "../entities/DailyState"
 import Backend from "../tools/Backend"
 import {setFatalError} from "./FatalErrorModule"
+import {setBootstrap} from "./BootstrapModule"
 
 const initState = DailyState.fromRaw({})
 
@@ -78,10 +79,22 @@ export function storeDailyState() {
 		dispatch(setDailyStateLoading(true))
 		Backend.request('v1/state', dailyState.toRaw(), "POST").then(response => {
 			dispatch(setDailyStateLoading(false))
+			dispatch(dispatch(setBootstrap({stateData: response})))
 		}).catch(e => {
 			dispatch(setDailyStateLoading(false))
 			setFatalError(e)
 		})
+	}
+}
+
+export function changeDay(moment) {
+	return (dispatch, getState) => {
+		let {stateData} = getState().BootstrapModule
+		if (stateData[moment.date()]) {
+			dispatch(initDailyState(DailyState.fromRaw(stateData[moment.date()])))
+		} else {
+			dispatch(initDailyState(DailyState.fromRaw({date: moment.unix()})))
+		}
 	}
 }
 
