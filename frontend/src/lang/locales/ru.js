@@ -76,6 +76,8 @@ export default function ru() {
 			no_access: "Вы пока не предоставили доступ друзьям",
 			add_friend: "Добавить друга",
 			users_add: 'Добавление пользователей',
+			accessed_friends: 'Друзья, имеющие доступ',
+			change: 'Изменить',
         }
     }
 }

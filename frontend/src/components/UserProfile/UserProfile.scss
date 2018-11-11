@@ -23,6 +23,32 @@
 			border-bottom: 1px solid rgba(0,0,0,0.12);
 			border-top: 1px solid rgba(0,0,0,0.12);
 		}
+
+		&--friends {
+			margin-top: 10px;
+		}
+	}
+
+	&__add {
+		font-size: 14px;
+		color: #5181B8;
+		font-weight: 500;
+	}
+
+	&__selected-friends {
+		padding: 0 16px;
+	}
+
+	&__friends-header {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+	}
+
+	&__friends-header-title {
+		font-size: 17px;
+		color: #000000;
+		font-weight: 600;
 	}
 
 	&__center {
@@ -104,6 +130,14 @@
 	&__friend {
 		display: flex;
 		align-items: center;
+
+		&--added {
+			padding-bottom: 12px;
+
+			&:last-child {
+				padding-bottom: 18px;
+			}
+		}
 	}
 
 	&__shadow {

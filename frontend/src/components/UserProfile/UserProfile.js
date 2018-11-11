@@ -4,7 +4,7 @@ import L from "../../lang/L"
 import {setUserBdate, setUserCycleLength, setUserMenstruationLength, updateUser} from "../../modules/UserModule"
 import "./UserProfile.css"
 import moment from "moment"
-import {Button, FixedLayout, Avatar, Checkbox, Cell} from "@vkontakte/vkui"
+import {Button, FixedLayout, Avatar, Checkbox} from "@vkontakte/vkui"
 import BottomPopup from "../BottomPopup/BottomPopup"
 import {toggleFriend, togglePopup} from "../../modules/FriendModule"
 
@@ -99,7 +99,28 @@ class UserProfile extends Component {
 							{L.t('add_friend')}
 						</Button>
 					</div>
-				</div> : null}
+				</div> : <div className="UserProfile__panel UserProfile__panel--friends">
+					<div className="UserProfile__basic UserProfile__friends-header">
+						<div>
+							{L.t('accessed_friends')}
+						</div>
+						<div>
+							<span className="UserProfile__add" onClick={() => this.toggleFriendsAddPanel()}>
+								{L.t('change')}
+							</span>
+						</div>
+					</div>
+					<div className="UserProfile__selected-friends">
+						{selectedFriends.map((friend) => {
+							return <div className="UserProfile__friend UserProfile__friend--added">
+								<Avatar src={friend.photo_200} size={40} style={{marginRight: 12}}/>
+								<div>
+									{friend.first_name}
+								</div>
+							</div>
+						})}
+					</div>
+				</div>}
 			{popupOpened ? <div className="UserProfile__shadow">
 			</div> : null}
 			{popupOpened ? <FixedLayout vertical='bottom'>

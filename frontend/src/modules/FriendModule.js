@@ -1,9 +1,7 @@
 import Backend from "../tools/Backend"
 import {devErrorLog} from "../tools/helpers"
-import {STATUS_WAIT} from "../components/FriendList/FriendList"
 
 const UPDATE = 'Friend.UPDATE'
-const MAKE_REQUEST_WAIT = 'Friend.MAKE_REQUEST_WAIT'
 const TOGGLE_FRIEND = 'Friend.TOGGLE_FRIEND'
 const COMMIT_FRIENS = 'Friend.COMMIT_FRIENS'
 const ROLLBACK_FRIENS = 'Friend.ROLLBACK_FRIENS'
@@ -31,13 +29,6 @@ const FriendModule = (state = initState, action) => {
 			}
 		case UPDATE:
 			return {...state, ...action.update}
-		case MAKE_REQUEST_WAIT:
-			return {...state, list: state.list.map( user => {
-				if (user.id === action.id) {
-					return {...user, status: STATUS_WAIT}
-				}
-				return user
-				} )}
 		case TOGGLE_FRIEND:
 			if (state.selected_ids.indexOf(action.id) !== -1) {
 				return {

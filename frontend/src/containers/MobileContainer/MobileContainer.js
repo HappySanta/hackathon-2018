@@ -5,7 +5,7 @@ import L from "../../lang/L"
 import {
 	getRouteByPath,
 	PANEL_BDATE, PANEL_CALENDAR,
-	PANEL_CYCLE_LENGTH, PANEL_FRIEND_LIST,
+	PANEL_CYCLE_LENGTH,
 	PANEL_MAIN,
 	PANEL_MENSTRUATED_AT,
 	PANEL_MENSTRUATION_LENGTH, PANEL_PROFILE,
@@ -23,7 +23,6 @@ import CycleLength from "../../components/Timing/CycleLength"
 import MenstruationLength from "../../components/Timing/MenstruationLength"
 import MenstruatedAt from "../../components/Timing/MenstruatedAt"
 import Bdate from "../../components/Timing/Bdate"
-import FriendList from "../../components/FriendList/FriendList"
 import MainScreen from "../../components/MainScreen/MainScreen"
 import WaitScreenMobile from "../../components/WaitScreenMobile/WaitScreenMobile"
 import CalendarScreen from "../../components/CalendarScreen/CalendarScreen"
@@ -155,9 +154,6 @@ class MobileContainer extends Component {
 					</Panel>
 					<Panel id={PANEL_BDATE} className="MobileContainer__panel">
 						<Bdate/>
-					</Panel>
-					<Panel id={PANEL_FRIEND_LIST} className="MobileContainer__panel">
-						<FriendList/>
 					</Panel>
 				</View>
 			</Root>
