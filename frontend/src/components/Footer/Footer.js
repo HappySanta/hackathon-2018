@@ -6,16 +6,43 @@ import {PANEL_CALENDAR, PANEL_MAIN, PANEL_PROFILE, pushPage} from "../../modules
 
 class Footer extends Component {
 
+	lock = false
+	stack = null
+
+	setLock() {
+		this.lock = true
+		setTimeout(() => {
+			this.lock = false
+			if (this.stack) {
+				this.stack()
+				this.stack = null
+			}
+		}, 700)
+	}
+
+	setToStck(fn) {
+		this.stack = fn
+	}
+
 	onPushMain = () => {
+		if (this.lock) return this.setToStck( () => this.onPushMain() )
+		this.setLock()
 		this.props.pushPage(PANEL_MAIN)
+		// console.log(PANEL_MAIN)
 	}
 
 	onPushCalendar = () => {
+		if (this.lock) return this.setToStck( () => this.onPushCalendar() )
+		this.setLock()
 		this.props.pushPage(PANEL_CALENDAR)
+		// console.log(PANEL_CALENDAR)
 	}
 
 	onPushProfile = () => {
+		if (this.lock) return this.setToStck( () => this.onPushProfile() )
+		this.setLock()
 		this.props.pushPage(PANEL_PROFILE)
+		// console.log(PANEL_PROFILE)
 	}
 
 	render() {
