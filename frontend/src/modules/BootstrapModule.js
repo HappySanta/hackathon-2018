@@ -10,6 +10,7 @@ export const SET_BOOTSTRAP = 'BootstrapModule.SET_BOOTSTRAP'
 const initState = {
 	loaded: false,
 	stateSchema: null,
+	stateData: null,
 }
 
 const BootstrapModule = (state = initState, action) => {
@@ -40,7 +41,11 @@ export function bootstrap(onSuccess) {
 				dispatch(setBootstrap({stateSchema: r.schema}))
 			}
 			if (r.state) {
-				dispatch(initDailyState(DailyState.fromRaw(r.state)))
+				let {selectedDate} = getState().UserModule
+				dispatch(setBootstrap({stateData: r.state}))
+				if (r.state[selectedDate.date()]) {
+					dispatch(initDailyState(DailyState.fromRaw(r.state[selectedDate.date()])))
+				}
 			}
 			onSuccess(r)
 		}).catch(e => {

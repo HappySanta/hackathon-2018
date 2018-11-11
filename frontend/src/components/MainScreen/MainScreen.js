@@ -7,6 +7,7 @@ import DayList from "../DayList/DayList"
 import DayActivity from "../DayActivity/DayActivity"
 import {setUserSelectedDate} from "../../modules/UserModule"
 import Footer from "../Footer/Footer"
+import {changeDay} from "../../modules/DailyStateModule"
 
 class MainScreen extends Component {
 
@@ -26,6 +27,11 @@ class MainScreen extends Component {
 		}
 	}
 
+	onDayChange(dateMoment) {
+		this.props.setUserSelectedDate(dateMoment)
+		this.props.changeDay(dateMoment)
+	}
+
 	render() {
 		const {cycleLength, menstruatedAt, menstruationLength, selectedDate} = this.props
 
@@ -38,7 +44,7 @@ class MainScreen extends Component {
 		}
 		return <div className={classList.join(' ')}>
 			<div className="MainScreen__day-list">
-				<DayList onChange={dateMoment => this.props.setUserSelectedDate(dateMoment)}/>
+				<DayList onChange={dateMoment => this.onDayChange(dateMoment)}/>
 			</div>
 			<div className="MainScreen__title">{L.t(isBadDay ? "menstruation": "current_cycle")}</div>
 			<div className="MainScreen__day">{L.t('x_day', {x:dayOfCycle+1})}</div>
@@ -62,4 +68,4 @@ function map(state) {
 	}
 }
 
-export default connect(map, {setUserSelectedDate})(MainScreen)
+export default connect(map, {setUserSelectedDate, changeDay})(MainScreen)

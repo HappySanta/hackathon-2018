@@ -42,6 +42,6 @@ class DailyStateController extends Controller
             ->delete();
         $dailyState->save();
         \DB::commit();
-        return new OkResponse(1);
+        return new OkResponse(DailyState::getUserPerLastThreeDays($request->userId, Carbon::now()->getTimestamp()));
     }
 }

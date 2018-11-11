@@ -17,7 +17,7 @@ class BootstrapController extends Controller
         return new OkResponse([
             'user' => $user,
             'schema' => DailyState::getSchema(),
-            'state' => DailyState::getUserStatePerDay($request->userId, Carbon::now()->getTimestamp())
+            'state' => DailyState::getUserPerLastThreeDays($request->userId, Carbon::now()->getTimestamp())
         ]);
     }
 }
