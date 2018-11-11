@@ -28,7 +28,7 @@ function map(state) {
 			menstruation_length: 7,
 			menstruated_at: moment('2018-11-01').unix(),
 			first_name: "Гаечка",
-			last_name: "Гаечка",
+			last_name: "",
 			photo_200: require('../FriendItem/g.png'),
 			state: ['Путешествие', 'Спокойная'],
 			comment: "",
