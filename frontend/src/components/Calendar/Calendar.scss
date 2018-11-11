@@ -1,5 +1,8 @@
 .Calendar {
 	background-color: #FFF;
+	&:last-child {
+		padding-bottom: calc(env(safe-area-inset-bottom) + 49px);
+	}
 
 	&__table {
 		background-color: #FFF;
