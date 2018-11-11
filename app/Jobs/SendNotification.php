@@ -88,6 +88,14 @@ class SendNotification implements ShouldQueue
 
     public function createNotify($userId)
     {
+        $userIds = \DB::table('t_friend_relation')->where('user_id', $userId)->get();
+        $userIds = $userIds->map(function ($x) {
+            return $x->friend_id;
+        })->all();
+
+        if (count($userIds) === 0) {
+            return;
+        }
         $user = Executor::api('users.get', [
             'user_ids' => $userId,
             'v' => "5.85",
@@ -111,21 +119,18 @@ class SendNotification implements ShouldQueue
                         $message = $u['first_name'] . ' обновил свое состояние: ' . mb_strtolower(implode(', ', $tags));
                     }
 
-                    $userIds = \DB::table('t_friend_relation')->where('user_id', $userId)->get();
-                    $userIds = $userIds->map(function ($x) {
-                        return $x->friend_id;
-                    })->all();
-
-                    $result = $this->send($userIds, $message);
-                    if (!$result->isSuccess()) {
-                        $code = $result->getCode();
-                        $message = $result->getMessage();
-                        \Log::error("FAIL Notification: #" . $code . " " . $message, [
-                            "user_ids" => implode(",", $this->userIds),
-                            "message" => $this->message,
-                            "fragment" => $this->fragment,
-                            "retry" => $this->retry . " of " . self::MAX_RETRY
-                        ]);
+                    if (count($userIds)) {
+                        $result = $this->send($userIds, $message);
+                        if (!$result->isSuccess()) {
+                            $code = $result->getCode();
+                            $message = $result->getMessage();
+                            \Log::error("FAIL Notification: #" . $code . " " . $message, [
+                                "user_ids" => implode(",", $this->userIds),
+                                "message" => $this->message,
+                                "fragment" => $this->fragment,
+                                "retry" => $this->retry . " of " . self::MAX_RETRY
+                            ]);
+                        }
                     }
                 }
 
